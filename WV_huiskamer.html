@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>WV_Glas</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>WV_huiskamer</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11791,7 +11791,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>19-02-2019, SM</p>
+<h1 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">&#182;</a></h1><p><p><div class="lev1 toc-item"><a href="#Warmteverbruik" data-toc-modified-id="Warmteverbruik-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Warmteverbruik</a></div><div class="lev1 toc-item"><a href="#Base-Library" data-toc-modified-id="Base-Library-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Base Library</a></div><div class="lev2 toc-item"><a href="#Material-Constants" data-toc-modified-id="Material-Constants-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Material Constants</a></div><div class="lev1 toc-item"><a href="#Warmteverbruik-Huiskamer" data-toc-modified-id="Warmteverbruik-Huiskamer-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Warmteverbruik Huiskamer</a></div><div class="lev2 toc-item"><a href="#De-huidige-meetgegevens" data-toc-modified-id="De-huidige-meetgegevens-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>De huidige meetgegevens</a></div><div class="lev2 toc-item"><a href="#Vloer" data-toc-modified-id="Vloer-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>Vloer</a></div><div class="lev2 toc-item"><a href="#Buitenmuur" data-toc-modified-id="Buitenmuur-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>Buitenmuur</a></div><div class="lev2 toc-item"><a href="#Ramen" data-toc-modified-id="Ramen-3.4"><span class="toc-item-num">3.4&nbsp;&nbsp;</span>Ramen</a></div><div class="lev2 toc-item"><a href="#Binnenmuur" data-toc-modified-id="Binnenmuur-3.5"><span class="toc-item-num">3.5&nbsp;&nbsp;</span>Binnenmuur</a></div><div class="lev2 toc-item"><a href="#Plafond" data-toc-modified-id="Plafond-3.6"><span class="toc-item-num">3.6&nbsp;&nbsp;</span>Plafond</a></div><div class="lev1 toc-item"><a href="#References" data-toc-modified-id="References-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>References</a></div></p>
 
 </div>
 </div>
@@ -11800,7 +11800,16 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="WarmteVerlies-Glas">WarmteVerlies Glas<a class="anchor-link" href="#WarmteVerlies-Glas">&#182;</a></h1><p>In dit document worden een aantal mogelijke raamverbeteringen met elkaar vergeleken voor wat betreft het warmteverlies, de kosten en de terugverdientijd die hiermee samenhangen.</p>
+<h1 id="Warmteverbruik">Warmteverbruik<a class="anchor-link" href="#Warmteverbruik">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Doel warmte verbruik van de huiskamer te berekenen, zodat de capaciteit van een warmtepomp bepaald kan worden. 
+In tweede instantie het berekenen van de warmtecapaciteit.</p>
 
 </div>
 </div>
@@ -11809,7 +11818,18 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Uitgangspunten">Uitgangspunten<a class="anchor-link" href="#Uitgangspunten">&#182;</a></h2>
+<h1 id="Base-Library">Base Library<a class="anchor-link" href="#Base-Library">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Material-Constants">Material Constants<a class="anchor-link" href="#Material-Constants">&#182;</a></h2><p><img src="overgangsweerstanden1.gif">
+<br>Overgangsweerstanden Rsi en Rse, bron: <a href="http://www.ekbouwadvies.nl/bouwbesluit/energiezuinigheid/rcwaarde.asp">http://www.ekbouwadvies.nl/bouwbesluit/energiezuinigheid/rcwaarde.asp</a>
+<br><br>Lambda waarden: <a href="http://www.joostdevree.nl/bouwkunde2/warmtegeleidingscoefficient.htm">http://www.joostdevree.nl/bouwkunde2/warmtegeleidingscoefficient.htm</a></p>
+
 </div>
 </div>
 </div>
@@ -11818,18 +11838,138 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Opp</span> <span class="o">=</span> <span class="mf">2.1</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">1.3</span><span class="o">*</span><span class="mf">2.5</span> <span class="o">+</span> <span class="mf">2.4</span><span class="o">*</span><span class="mf">1.3</span> <span class="o">+</span> <span class="mf">1.8</span><span class="o">*</span><span class="mf">2.1</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Totaal Oppervlakte = &quot;</span><span class="p">,</span> <span class="n">Opp</span> <span class="p">)</span>
-<span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span>   <span class="nn">Base_Heat</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">Base_Heat</span>
 
-<span class="c1"># Veronderstelde temperaturen</span>
-<span class="n">Temperatuur_Binnen</span> <span class="o">=</span> <span class="mf">20.0</span>
-<span class="n">Temperatuur_Buiten</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">Base_Heat</span><span class="o">.</span><span class="n">GraadDagen</span> <span class="o">=</span> <span class="mi">2774</span>
+<span class="n">Base_Heat</span><span class="o">.</span><span class="n">PrintLevel</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="c1"># Voor de berekening van de kostenbesparing gaan we uit van het aantal graaddagen van het vorige jaar.</span>
+
+<span class="n">Piepschuim_Lambda</span>       <span class="o">=</span> <span class="mf">0.035</span>
+<span class="n">Kurk_Lambda</span>             <span class="o">=</span> <span class="mf">0.039</span>
+<span class="n">Beton_Licht_Lambda</span>      <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">Beton_Zwaar_Lambda</span>      <span class="o">=</span> <span class="mf">1.7</span>
+<span class="n">Hardboard_Lambda</span>        <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">Hout_Lambda</span>             <span class="o">=</span> <span class="mf">0.14</span>
+<span class="n">Hardhout_Lambda</span>         <span class="o">=</span> <span class="mf">0.17</span>
+<span class="n">Lucht_Lambda</span>            <span class="o">=</span> <span class="mf">0.025</span>
+
+<span class="c1"># overgangsweerstand van de binnenmuur, zoals gedefinieerd in het bouwbesluit</span>
+<span class="n">Rsi</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rsi&quot;</span> <span class="p">)</span>
+<span class="n">Rsi</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.13</span>
+
+<span class="c1"># overgangsweerstand van de buitenmuur, zoals gedefinieerd in het bouwbesluit</span>
+<span class="n">Rse</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rse&quot;</span> <span class="p">)</span>
+<span class="n">Rse</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+<span class="c1"># Voor de vloer gelden afwijkende waarden</span>
+<span class="n">Rsi_Vloer</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rsi Vloer&quot;</span> <span class="p">)</span>
+<span class="n">Rsi_Vloer</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.17</span>
+<span class="n">Rse_Vloer</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rse Vloer&quot;</span> <span class="p">)</span>
+<span class="n">Rse_Vloer</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.17</span>
+
+<span class="n">Rsi_Plafond</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rsi Plafond&quot;</span> <span class="p">)</span>
+<span class="n">Rsi_Plafond</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Warmteverbruik-Huiskamer">Warmteverbruik Huiskamer<a class="anchor-link" href="#Warmteverbruik-Huiskamer">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="De-huidige-meetgegevens">De huidige meetgegevens<a class="anchor-link" href="#De-huidige-meetgegevens">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Voor Vloer en plafond</span>
+<span class="n">Lengte</span>  <span class="o">=</span> <span class="mf">7.00</span>
+<span class="n">Breedte</span> <span class="o">=</span> <span class="mf">7.00</span>
+<span class="n">Hoogte</span>  <span class="o">=</span> <span class="mf">2.50</span>
+
+<span class="n">Buitenmuur_Lengte</span> <span class="o">=</span> <span class="mf">9.40</span>
+<span class="n">Binnenmuur_Lengte</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">Temperatuur_Binnen</span>      <span class="o">=</span> <span class="mf">20.0</span>
+<span class="n">Temperatuur_Buiten</span>      <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">Temperatuur_Kruipruimte</span> <span class="o">=</span> <span class="mf">8.0</span>
+
+<span class="c1"># Voor de berekening van de kostenbesparing gaan we uit van </span>
+<span class="c1"># Temperatuurverschil zoals hierboven gedefinieerd</span>
+<span class="c1"># Dit temperatuurverschil is (gemiddeld) gedurende 100 dagen en 24 uur per dag aanwezig.  DIT MOET MOGELIJK BIJGESTELD WORDEN</span>
 <span class="c1"># De gasprijs in [Euro] per m3:</span>
 <span class="n">Price_Gas</span> <span class="o">=</span> <span class="mf">0.80</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Vloer">Vloer<a class="anchor-link" href="#Vloer">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Het vierkant van de kamer meet 7.00 * 7.00 meter. 
+<br>De extra hoek van de keuken wordt gecompenseerd door de hoek die wegvalt van hal + wc.
+<br>De vloer is samengesteld uit beton met daaronder piepschuim. De dikte van beide lagen moet nog worden opgemeten.
+<br>Bij een buitentemperatuur net onder het vriesput is de temperatuur van de kruipruimte behoorlijk constant en bedraagt ongeveer 7 Celcius.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Woonkamer_Vloer</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Woonkamer Vloer Beton&quot;</span> <span class="p">)</span>  
+<span class="n">Woonkamer_Vloer</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Beton_Zwaar_Lambda</span>
+<span class="n">Woonkamer_Vloer</span><span class="o">.</span><span class="n">Dikte</span> <span class="o">=</span> <span class="mf">0.20</span>
+
+<span class="n">Woonkamer_Piepschuim</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Woonkamer Vloer Piepschuim&quot;</span> <span class="p">)</span>  
+<span class="n">Woonkamer_Piepschuim</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Piepschuim_Lambda</span>
+<span class="n">Woonkamer_Piepschuim</span><span class="o">.</span><span class="n">Dikte</span> <span class="o">=</span> <span class="mf">0.10</span>
+
+<span class="n">Kurk_Vloer</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Woonkamer KurkVloer&quot;</span> <span class="p">)</span>  
+<span class="n">Kurk_Vloer</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Kurk_Lambda</span>
+<span class="n">Kurk_Vloer</span><span class="o">.</span><span class="n">Dikte</span> <span class="o">=</span> <span class="mf">0.003</span>
+
+<span class="n">Vloer</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Woonkamer.Vloer&quot;</span> <span class="p">)</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Lengte</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Breedte</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi_Vloer</span> <span class="p">)</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kurk_Vloer</span> <span class="p">)</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Woonkamer_Vloer</span> <span class="p">)</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Woonkamer_Piepschuim</span> <span class="p">)</span>
+<span class="n">Vloer</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse_Vloer</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Vloer</span> <span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11846,7 +11986,10 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Totaal Oppervlakte =  12.25
+<pre>Name        = Woonkamer.Vloer
+Layers    = [ Rsi Vloer, Woonkamer KurkVloer, Woonkamer Vloer Beton, Woonkamer Vloer Piepschuim, Rse Vloer,  ]
+R-Waarden = 3.39 [ 0.17, 0.08, 0.12, 2.86, 0.17,  ] [m2.K/W]
+
 </pre>
 </div>
 </div>
@@ -11859,27 +12002,169 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Materiaal-Constanten">Materiaal Constanten<a class="anchor-link" href="#Materiaal-Constanten">&#182;</a></h2><p>Hieronder de definitie van de gebruikte materialen.
-<br>Iedere vorm om de warmtegeleiding op te geven is toegestaan ( R-waarde, U-waarde of Lambda + Dikte).</p>
+<h2 id="Buitenmuur">Buitenmuur<a class="anchor-link" href="#Buitenmuur">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>De totale lengte van de buitenmuur bedraagt 9.40.
+<br>Voor de berekening is gebruik gemaakt van <a href="https://www.google.nl/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwjo2u2OqdbRAhVlGsAKHXbfCYUQFgg8MAE&amp;url=http%3A%2F%2Fwww.wienerberger.be%2Frekenblad-u-waarde-van-een-spouwmuur.html&amp;usg=AFQjCNEmMozqL3cdMs6CztAMZOI9FY523g&amp;cad=rja">https://www.google.nl/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0ahUKEwjo2u2OqdbRAhVlGsAKHXbfCYUQFgg8MAE&amp;url=http%3A%2F%2Fwww.wienerberger.be%2Frekenblad-u-waarde-van-een-spouwmuur.html&amp;usg=AFQjCNEmMozqL3cdMs6CztAMZOI9FY523g&amp;cad=rja</a></p>
+<p>De muur is opgemeten, waarbij het volgende is geconstateerd:</p>
+<ul>
+<li>buitensteen is waalformaat (20 x 10 x 5 cm)</li>
+<li>lucht spauw van 5 cm</li>
+<li>isolatie (Rockwoll ?) van 5 cm</li>
+<li>Vrij grote en lichte binnensteen 30 x 20 x 10 cm,  Poriso ??</li>
+</ul>
+<p>Gevelsteen: R = 0.084  m2.K/W</p>
+<p>Isolatie van 5 cm geeft volgens Rockwool een R = 1.4, volgens Rockwool 1.3 <a href="https://www.isolatiediscounter.nl/rockwool-steenwol-bouwplaat-120-x-60-x-5-cm-rd-1-30">https://www.isolatiediscounter.nl/rockwool-steenwol-bouwplaat-120-x-60-x-5-cm-rd-1-30</a></p>
+<p>Binnenmuur: R = 0.378 m2.K/W</p>
+<p>Totaal geeft dit een U-Waarde van 0.52 W /m2.K</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">Base_Heat</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">Base_Heat</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Spouw_Zwak_Geventileerd</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Spouw Zwak Geventileerd&quot;</span> <span class="p">)</span>
+<span class="n">Spouw_Zwak_Geventileerd</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.17</span>   <span class="c1"># http://www.ekbouwadvies.nl/bouwbesluit/energiezuinigheid/spouwventilatie.asp</span>
 
-<span class="c1"># luchtweerstand van de binnenmuur, zoals gedefinieerd in het bouwbesluit</span>
-<span class="n">Rsi</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rsi&quot;</span> <span class="p">)</span>
-<span class="n">Rsi</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.13</span>
+<span class="n">Kalkzandsteen</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kalkzandsteen&quot;</span> <span class="p">)</span>
+<span class="n">Kalkzandsteen</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.1</span>
 
-<span class="c1"># luchtweerstand van de buitenmuur, zoals gedefinieerd in het bouwbesluit</span>
-<span class="n">Rse</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rse&quot;</span> <span class="p">)</span>
-<span class="n">Rse</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">Baksteen</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Baksteen&quot;</span> <span class="p">)</span>
+<span class="n">Baksteen</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.08</span>
+
+<span class="n">Glaswol_5cm</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Glaswol 5cm&quot;</span> <span class="p">)</span>
+<span class="n">Glaswol_5cm</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="mf">0.035</span>
+<span class="n">Glaswol_5cm</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">Iso_Parels_5cm</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Iso-Parels 5cm&quot;</span> <span class="p">)</span>
+<span class="n">Iso_Parels_5cm</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="mf">0.034</span>
+<span class="n">Iso_Parels_5cm</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">PIR_alu_10cm</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;PIR_alu_10cm&quot;</span> <span class="p">)</span>
+<span class="n">PIR_alu_10cm</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">4.54</span>
+<span class="n">PIR_alu_5cm</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;PIR_alu_5cm&quot;</span> <span class="p">)</span>
+<span class="n">PIR_alu_5cm</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">2.27</span>
+<span class="n">PIR_alu_2cm</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;PIR_alu_2cm&quot;</span> <span class="p">)</span>
+<span class="n">PIR_alu_2cm</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.91</span>
+
+<span class="n">Leem_Deklaag</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Leem_Deklaag&quot;</span> <span class="p">)</span>
+<span class="n">Leem_Deklaag</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">Leem_Deklaag</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">Gipsplaat</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Gipsplaat&quot;</span> <span class="p">)</span>
+<span class="n">Gipsplaat</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.04</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Buitenmuur_Nu</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Buitenmuur_Nu&quot;</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Buitenmuur_Lengte</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glaswol_5cm</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Spouw_Zwak_Geventileerd</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Baksteen</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
+
+<span class="n">Buitenmuur_Na</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Buitenmuur Parels&quot;</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Buitenmuur_Lengte</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glaswol_5cm</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Iso_Parels_5cm</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Baksteen</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Na</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
+
+<span class="n">Buitenmuur_Super</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Buitenmuur_Super&quot;</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Buitenmuur_Lengte</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Gipsplaat</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">PIR_alu_5cm</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glaswol_5cm</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Iso_Parels_5cm</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Baksteen</span> <span class="p">)</span>
+<span class="n">Buitenmuur_Super</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Buitenmuur_Nu</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Buitenmuur_Na</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Buitenmuur_Super</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Name        = Buitenmuur_Nu
+Layers    = [ Rsi, Kalkzandsteen, Glaswol 5cm, Spouw Zwak Geventileerd, Baksteen, Rse,  ]
+R-Waarden = 1.95 [ 0.13, 0.10, 1.43, 0.17, 0.08, 0.04,  ] [m2.K/W]
+
+Name        = Buitenmuur Parels
+Layers    = [ Rsi, Kalkzandsteen, Glaswol 5cm, Iso-Parels 5cm, Baksteen, Rse,  ]
+R-Waarden = 3.25 [ 0.13, 0.10, 1.43, 1.47, 0.08, 0.04,  ] [m2.K/W]
+
+Name        = Buitenmuur_Super
+Layers    = [ Rsi, Gipsplaat, PIR_alu_5cm, Kalkzandsteen, Glaswol 5cm, Iso-Parels 5cm, Baksteen, Rse,  ]
+R-Waarden = 5.56 [ 0.13, 0.04, 2.27, 0.10, 1.43, 1.47, 0.08, 0.04,  ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Ramen">Ramen<a class="anchor-link" href="#Ramen">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Opp</span> <span class="o">=</span> <span class="mf">2.1</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">1.3</span><span class="o">*</span><span class="mf">2.5</span> <span class="o">+</span> <span class="mf">2.4</span><span class="o">*</span><span class="mf">1.3</span> <span class="o">+</span> <span class="mf">1.8</span><span class="o">*</span><span class="mf">2.1</span>
 
 <span class="n">HR_Glas</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;HR glas&quot;</span> <span class="p">)</span> 
 <span class="n">HR_Glas</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="mf">2.8</span>
@@ -11890,92 +12175,30 @@ div#notebook {
 <span class="n">HRxxx_Glas</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;HR+++ glas&quot;</span> <span class="p">)</span> 
 <span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="mf">0.5</span>
 
-<span class="c1">#print ( HR_Glas, HRxx_Glas, HRxxx_Glas )</span>
-</pre></div>
+<span class="n">Ramen_Nu</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Ramen Nu&quot;</span> <span class="p">)</span>
+<span class="n">Ramen_Nu</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">Ramen_Nu</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Ramen_Nu</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Ramen_Nu</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Ramen_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">HR_Glas</span> <span class="p">)</span>
 
-</div>
-</div>
-</div>
+<span class="n">Ramen_HRxx</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Ramen HR++&quot;</span> <span class="p">)</span>
+<span class="n">Ramen_HRxx</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">Ramen_HRxx</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Ramen_HRxx</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Ramen_HRxx</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Ramen_HRxx</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">HRxx_Glas</span> <span class="p">)</span>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="HR-Glas">HR Glas<a class="anchor-link" href="#HR-Glas">&#182;</a></h2><p>Dit is het klassiek Thermopane glas van 30 jaar geleden.</p>
+<span class="n">Ramen_HRxxx</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Ramen HR+++&quot;</span> <span class="p">)</span>
+<span class="n">Ramen_HRxxx</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">Ramen_HRxxx</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Ramen_HRxxx</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Ramen_HRxxx</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Ramen_HRxxx</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">HRxxx_Glas</span> <span class="p">)</span>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HR_Glas</span><span class="o">.</span><span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>   <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span>  <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">HR_Glas</span> <span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = HR glas
-Lengte      = 6.125 [m]
-Hoogte      = 2 [m]
-Oppervlakte = 12.2 [m2]
-R-Waarde    = 0.36 [m2.K/W]
-U-Waarde    = 2.80 [W/m2.K]
-T-Inside    = 20.0 [Celsius]
-T-Outside   = 0.0 [Celsius]
-Heat Loss   = 686 [W]
-Heat Loss 1m2   = 56 [W]
-Energy Cost 1m2 = 10.75 [Euro]
-Gasprijs        = 0.80 [Euro]
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="HR++-Glas">HR++ Glas<a class="anchor-link" href="#HR++-Glas">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>   <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span>  <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">HRxx_Glas</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Ramen_Nu</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Ramen_HRxx</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Ramen_HRxxx</span> <span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11992,18 +12215,17 @@ Gasprijs        = 0.80 [Euro]
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = HR++ glas
-Lengte      = 6.125 [m]
-Hoogte      = 2 [m]
-Oppervlakte = 12.2 [m2]
-R-Waarde    = 0.91 [m2.K/W]
-U-Waarde    = 1.10 [W/m2.K]
-T-Inside    = 20.0 [Celsius]
-T-Outside   = 0.0 [Celsius]
-Heat Loss   = 269 [W]
-Heat Loss 1m2   = 22 [W]
-Energy Cost 1m2 = 4.22 [Euro]
-Gasprijs        = 0.80 [Euro]
+<pre>Name        = Ramen Nu
+Layers    = [ HR glas,  ]
+R-Waarden = 0.36 [ 0.36,  ] [m2.K/W]
+
+Name        = Ramen HR++
+Layers    = [ HR++ glas,  ]
+R-Waarden = 0.91 [ 0.91,  ] [m2.K/W]
+
+Name        = Ramen HR+++
+Layers    = [ HR+++ glas,  ]
+R-Waarden = 2.00 [ 2.00,  ] [m2.K/W]
 
 </pre>
 </div>
@@ -12017,88 +12239,10 @@ Gasprijs        = 0.80 [Euro]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="HR+++-Glas">HR+++ Glas<a class="anchor-link" href="#HR+++-Glas">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>   <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span>  <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">HRxxx_Glas</span> <span class="p">)</span>
-</pre></div>
+<h2 id="Kozijnen">Kozijnen<a class="anchor-link" href="#Kozijnen">&#182;</a></h2><p>Gegevens afkomstig van WV_Glas.ipynb</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = HR+++ glas
-Lengte      = 6.125 [m]
-Hoogte      = 2 [m]
-Oppervlakte = 12.2 [m2]
-R-Waarde    = 2.00 [m2.K/W]
-U-Waarde    = 0.50 [W/m2.K]
-T-Inside    = 20.0 [Celsius]
-T-Outside   = 0.0 [Celsius]
-Heat Loss   = 122 [W]
-Heat Loss 1m2   = 10 [W]
-Energy Cost 1m2 = 1.92 [Euro]
-Gasprijs        = 0.80 [Euro]
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Kozijnen">Kozijnen<a class="anchor-link" href="#Kozijnen">&#182;</a></h2><p>Van een typisch kozijn (3 ramen aan de voorkant, waarvan 1 draaibaar) is het oppervlakte geschat t.o.v. de glas oppervlakte. Dit percentage is gebruikt voor de gehele beglazing. Het draaibare deel komt slechts 2 keer voor en wortd hier verwaarloosd. De tuindeuren tellen niet mee omdat die worden verdikt en apart worden geteld.
-<br><br> Vaak (en zeker door leveranciers van kunststof kozijnen) wordt voor hout de forfaitaire waarde van U = 2.4 [W/m2K] aangehouden. Waar deze waarde vandaan komt weet ik niet maar ik kan geen houtsoort vinden die zo'n slechte isolatie-waarde heeft.
-<br>In deze link staan van een groot aantal gangbare houtsoorten de isolatie weerstand: 
-<a href="https://ph-bouwadvies.nl/u-waarden-van-kozijnen-en-de-energieprestatie/">https://ph-bouwadvies.nl/u-waarden-van-kozijnen-en-de-energieprestatie/</a></p>
-<p>Een online berekentool voor kozijnen is hier te vinden: <a href="http://www.warmteweerstand.nl/U-waarde_kozijn.aspx">http://www.warmteweerstand.nl/U-waarde_kozijn.aspx</a>
-<br>Deze tool geeft een veel realistischers waarde voor de isolatie van houten kozijnen, maar ook hier heb ik twijfels over het gebruikte reken-algoritme. Het verschil tussen Grenen (1.36) en Merbau (1.44) is namelijk veel kleiner dan op grond van de lambda mag worden verwacht.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Lambda_Merbau</span>           <span class="o">=</span> <span class="mf">0.18</span>  <span class="c1"># geldt ook voo Afzalia, Bintanger, Robinia, Eiken, Supupira</span>
-<span class="n">Lambda_Dark_Red_Meranti</span> <span class="o">=</span> <span class="mf">0.16</span>  <span class="c1"># geldt ook voor Iroko, Sapeli, Sipo,Teak</span>
-<span class="n">Lambda_Grenen</span>           <span class="o">=</span> <span class="mf">0.13</span>  <span class="c1"># geldt ook Led-Red-Meranti, Lariks, Oregon-Pine, Accoya</span>
-<span class="n">Lambda_Vuren</span>            <span class="o">=</span> <span class="mf">0.11</span>  <span class="c1"># geldt ook voor Western-Red-Cedar</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -12112,106 +12256,104 @@ Gasprijs        = 0.80 [Euro]
 <span class="n">Kozijn_Opp1</span>      <span class="o">=</span> <span class="n">Voorraam_Opp</span> <span class="o">-</span> <span class="n">Glas_Opp</span>
 <span class="n">Kozijn_Opp1_Perc</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span> <span class="n">Kozijn_Opp1</span> <span class="o">/</span> <span class="n">Voorraam_Opp</span>
 
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Voorraam_Opp     = </span><span class="si">%.2f</span><span class="s2"> [m2]&quot;</span> <span class="o">%</span> <span class="n">Voorraam_Opp</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Kozijn_Opp1      = </span><span class="si">%.2f</span><span class="s2"> [m2]&quot;</span> <span class="o">%</span> <span class="n">Kozijn_Opp1</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Draai_Opp        = </span><span class="si">%.2f</span><span class="s2"> [m2]&quot;</span> <span class="o">%</span> <span class="n">Draai_Opp</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Kozijn_Opp1_Perc = </span><span class="si">%.0f</span><span class="s2"> </span><span class="si">%%</span><span class="s2">&quot;</span>   <span class="o">%</span> <span class="n">Kozijn_Opp1_Perc</span> <span class="p">)</span>
+<span class="n">Kozijn_Opp</span> <span class="o">=</span> <span class="n">Kozijn_Opp1_Perc</span> <span class="o">*</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">100</span>
+<span class="n">Kozijn_Dikte</span> <span class="o">=</span> <span class="mf">0.12</span>
+
+<span class="n">Lambda_Dark_Red_Meranti</span> <span class="o">=</span> <span class="mf">0.16</span>  <span class="c1"># geldt ook voor Iroko, Sapeli, Sipo,Teak</span>
+<span class="n">Kozijn_Dark_Red_Meranti</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Dark Red Merantie&quot;</span> <span class="p">)</span>  
+<span class="n">Kozijn_Dark_Red_Meranti</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Dark_Red_Meranti</span>
+<span class="n">Kozijn_Dark_Red_Meranti</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
+
+<span class="n">Kozijnen</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Dark Red Meranti&quot;</span> <span class="p">)</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijnen</span><span class="o">.</span><span class="n">Lengte</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Dark_Red_Meranti</span> <span class="p">)</span>
+<span class="n">Kozijnen</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Voorraam_Opp     = 2.06 [m2]
-Kozijn_Opp1      = 0.47 [m2]
-Draai_Opp        = 0.28 [m2]
-Kozijn_Opp1_Perc = 23 %
-</pre>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Binnenmuur">Binnenmuur<a class="anchor-link" href="#Binnenmuur">&#182;</a></h2>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>De binnenmuur is deels voorzien van een spouw en deels gewoon een enkelsteens muur
+<br> En voor de temperatuur aan de andere kant gebruiken we in eerste instantie de temperatuur van de kruipruimte.</p>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Kozijn_Dikte</span> <span class="o">=</span> <span class="mf">0.12</span>
-<span class="n">Draai_Dikte</span>  <span class="o">=</span> <span class="mf">0.05</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Binnenmuur_Spouw_Lengte</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">Binnenmuur_Enkel_Lengte</span> <span class="o">=</span> <span class="mi">4</span>
 
-<span class="n">Kozijn_Opp</span> <span class="o">=</span> <span class="n">Kozijn_Opp1_Perc</span> <span class="o">*</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">100</span>
+<span class="n">Binnenmuur_Spouw_Nu</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Binnenmuur Spouw Nu&quot;</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Binnenmuur_Spouw_Lengte</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glaswol_5cm</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Spouw_Zwak_Geventileerd</span> <span class="p">)</span>
+<span class="c1">#Binnenmuur_Spouw_Nu.Add ( Iso_Parels_5cm )</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Baksteen</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span> 
 
-<span class="n">Kozijn_Merbau</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Merbau&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Merbau</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Merbau</span>
-<span class="n">Kozijn_Merbau</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
+<span class="n">Binnenmuur_Spouw_Parels</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Binnenmuur Spouw Parels&quot;</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Binnenmuur_Spouw_Lengte</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glaswol_5cm</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Iso_Parels_5cm</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Baksteen</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Spouw_Parels</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span> 
 
-<span class="n">Kozijn_Dark_Red_Meranti</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Dark Red Merantie&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Dark_Red_Meranti</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Dark_Red_Meranti</span>
-<span class="n">Kozijn_Dark_Red_Meranti</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
+<span class="n">Binnenmuur_Enkel_Nu</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Binnenmuur Enkel&quot;</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Binnenmuur_Enkel_Lengte</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span> 
 
-<span class="n">Kozijn_Grenen</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Grenen&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Grenen</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Grenen</span>
-<span class="n">Kozijn_Grenen</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Binnenmuur Enkel 5cm PIR&quot;</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Binnenmuur_Enkel_Lengte</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="n">Hoogte</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kalkzandsteen</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">PIR_alu_5cm</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Gipsplaat</span> <span class="p">)</span>
+<span class="n">Binnenmuur_Enkel_PIR5</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span> 
 
-<span class="n">Kozijn_Vuren</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Vuren&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Vuren</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Vuren</span>
-<span class="n">Kozijn_Vuren</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
-
-<span class="n">Kozijn_HH1</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Merbau&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Merbau</span> <span class="p">)</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Kozijn_HH2</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Dark Red Meranti&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Dark_Red_Meranti</span> <span class="p">)</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Kozijn_HH3</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Grenen&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Grenen</span> <span class="p">)</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Kozijn_HH4</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Vuren&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Vuren</span> <span class="p">)</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Base_Heat</span><span class="o">.</span><span class="n">PrintLevel</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH1</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH2</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH3</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH4</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Binnenmuur_Spouw_Nu</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Binnenmuur_Spouw_Parels</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Binnenmuur_Enkel_Nu</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Binnenmuur_Enkel_PIR5</span> <span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12228,21 +12370,21 @@ Kozijn_Opp1_Perc = 23 %
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = Kozijn Merbau
-Layers    = [ Rsi, Kozijn Merbau, Rse,  ]
-R-Waarden = 0.84 [ 0.13, 0.67, 0.04,  ] [m2.K/W]
+<pre>Name        = Binnenmuur Spouw Nu
+Layers    = [ Rsi, Kalkzandsteen, Glaswol 5cm, Spouw Zwak Geventileerd, Baksteen, Rsi,  ]
+R-Waarden = 2.04 [ 0.13, 0.10, 1.43, 0.17, 0.08, 0.13,  ] [m2.K/W]
 
-Name        = Kozijn Dark Red Meranti
-Layers    = [ Rsi, Kozijn Dark Red Merantie, Rse,  ]
-R-Waarden = 0.92 [ 0.13, 0.75, 0.04,  ] [m2.K/W]
+Name        = Binnenmuur Spouw Parels
+Layers    = [ Rsi, Kalkzandsteen, Glaswol 5cm, Iso-Parels 5cm, Baksteen, Rsi,  ]
+R-Waarden = 3.34 [ 0.13, 0.10, 1.43, 1.47, 0.08, 0.13,  ] [m2.K/W]
 
-Name        = Kozijn Grenen
-Layers    = [ Rsi, Kozijn Grenen, Rse,  ]
-R-Waarden = 1.09 [ 0.13, 0.92, 0.04,  ] [m2.K/W]
+Name        = Binnenmuur Enkel
+Layers    = [ Rsi, Kalkzandsteen, Rsi,  ]
+R-Waarden = 0.36 [ 0.13, 0.10, 0.13,  ] [m2.K/W]
 
-Name        = Kozijn Vuren
-Layers    = [ Rsi, Kozijn Vuren, Rse,  ]
-R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
+Name        = Binnenmuur Enkel 5cm PIR
+Layers    = [ Rsi, Kalkzandsteen, PIR_alu_5cm, Gipsplaat, Rsi,  ]
+R-Waarden = 2.67 [ 0.13, 0.10, 2.27, 0.04, 0.13,  ] [m2.K/W]
 
 </pre>
 </div>
@@ -12256,10 +12398,26 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Vergelijk-van-de-verschillende-Glassoorten">Vergelijk van de verschillende Glassoorten<a class="anchor-link" href="#Vergelijk-van-de-verschillende-Glassoorten">&#182;</a></h2><p>Deze tabel functie is gemaakt om het warmteverlies van een gehele ruimte of woning in detail weer te geven. In de huidige situatie waar een aantal verschillende glasssoorten met elkaar worden vergeleken, is de onderste regel "Totaal", evenals enkele kolommen, volkomen zinloos. 
-<br>Het rechter deel van de tabel (kolommen met de getallen erboven) geeft de kolomnaam de buitentemperatuur aan en de waarden in die kolom staan, is het warmteverlies in Watt dat door de muur weglekt bij die buitentemperatuur. 
-<br>kolom Kosten    = de geschatte totale jaarlijke Energiekosten in Euros (bij gebruik van Gas)
-<br>kolom Kosten-m2 = de geschatte jaarlijke Energiekosten per m2 in Euros (bij gebruik van Gas)</p>
+<h2 id="Plafond">Plafond<a class="anchor-link" href="#Plafond">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Het oppervlakte is gelijk aan het oppervlakte van de bodem.
+<br>De tussenvloer bestaat uit 19 cm beton (deels hol) + 3 mm kurk.
+<br>De vloer betsaat uit zogenaamde "kanaalplaten" (vermoedelijk 15 cm,, want dat is een standaardmaat) met daarbovenop een deklaag waarin de leidingen zijn weggewerkt.
+<br>De totale dikte bedraagt 19 cm.
+<br>Van de betonplaten is geen warmtegeleiding te vinden. Tegenwoordig worden deze platen vooral geleverd met eps laag en dan bepaald de dikte van de eps laag nagenoeg volledig de warmtegeleiding.
+<br>Bovenruimten zijn niet verwarmd, er is dus een opwaartse warmtestroom, hetgeen betekent dat Rsi en Rse beide 0.1 moeten zijn.
+<br></p>
+<ol>
+<li>ECHO-kanaalplaatvloer, 15 cm (R = 0,147)</li>
+<li>Dekvloer, 5 cm (λ  = 1,3)</li>
+<li>Kurk, 3 mm</li>
+</ol>
 
 </div>
 </div>
@@ -12269,8 +12427,707 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ts</span>  <span class="o">=</span> <span class="nb">range</span> <span class="p">(</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
-<span class="n">Elements</span> <span class="o">=</span> <span class="p">[</span> <span class="n">HR_Glas</span><span class="p">,</span> <span class="n">HRxx_Glas</span><span class="p">,</span> <span class="n">HRxxx_Glas</span><span class="p">,</span> <span class="n">Kozijn_HH1</span><span class="p">,</span> <span class="n">Kozijn_HH2</span><span class="p">,</span> <span class="n">Kozijn_HH3</span><span class="p">,</span> <span class="n">Kozijn_HH4</span> <span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Plafond_Kanaalplaat</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Plafond Kanaalplaat&quot;</span> <span class="p">)</span>
+<span class="n">Plafond_Kanaalplaat</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.147</span>
+<span class="c1">#print ( Plafond_Kanaalplaat )</span>
+
+<span class="n">Plafond_DekVloer</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Plafond DekVloer&quot;</span> <span class="p">)</span>
+<span class="n">Plafond_DekVloer</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">Plafond_DekVloer</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="c1">#print ( Plafond_DekVloer )</span>
+
+<span class="n">Kurk</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kurk&quot;</span> <span class="p">)</span>  
+<span class="n">Kurk</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Kurk_Lambda</span>
+<span class="n">Kurk</span><span class="o">.</span><span class="n">Dikte</span> <span class="o">=</span> <span class="mf">0.003</span>
+<span class="c1">#print ( Kurk )</span>
+
+<span class="n">Plafond</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Plafond&#39;</span> <span class="p">)</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi_Plafond</span> <span class="p">)</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Plafond_Kanaalplaat</span> <span class="p">)</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Plafond_DekVloer</span> <span class="p">)</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kurk</span> <span class="p">)</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi_Plafond</span> <span class="p">)</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Lengte</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Breedte</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Plafond</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Plafond_New</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Plafond_New&#39;</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">PIR_alu_5cm</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Plafond_Kanaalplaat</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Plafond_DekVloer</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kurk</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Plafond</span><span class="o">.</span><span class="n">Lengte</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Plafond</span><span class="o">.</span><span class="n">Breedte</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Plafond</span><span class="o">.</span><span class="n">Temperature_Inside</span>
+<span class="n">Plafond_New</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Plafond</span><span class="o">.</span><span class="n">Temperature_Outside</span>
+
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Plafond</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Plafond_New</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Name        = Plafond
+Layers    = [ Rsi Plafond, Plafond Kanaalplaat, Plafond DekVloer, Kurk, Rsi Plafond,  ]
+R-Waarden = 0.46 [ 0.10, 0.15, 0.04, 0.08, 0.10,  ] [m2.K/W]
+
+Name        = Plafond_New
+Layers    = [ Rsi, PIR_alu_5cm, Plafond Kanaalplaat, Plafond DekVloer, Kurk, Rsi,  ]
+R-Waarden = 2.79 [ 0.13, 2.27, 0.15, 0.04, 0.08, 0.13,  ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Haldeur">Haldeur<a class="anchor-link" href="#Haldeur">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Deur_Dikte</span>   <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">Deur_Breedte</span> <span class="o">=</span> <span class="mf">0.85</span>
+<span class="n">Deur_Hoogte</span>  <span class="o">=</span> <span class="mf">2.05</span>
+
+<span class="n">Glas_Enkel</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Glas Enkel&quot;</span> <span class="p">)</span>  
+<span class="n">Glas_Enkel</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="mf">5.7</span>
+
+<span class="n">Hout</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Hout&quot;</span> <span class="p">)</span>  
+<span class="n">Hout</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Hout_Lambda</span>
+<span class="n">Hout</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Deur_Dikte</span>
+
+<span class="n">Lucht_2cm</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Lucht 2 cm&quot;</span> <span class="p">)</span>  
+<span class="n">Lucht_2cm</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lucht_Lambda</span>
+<span class="n">Lucht_2cm</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">CarbonaatPlaat</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;CarbonaatPlaat&quot;</span> <span class="p">)</span>  
+<span class="n">CarbonaatPlaat</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span> <span class="mf">1.8</span>      <span class="c1">#  16 mm U=2.3,  16 TOP-X U=1.8</span>
+
+
+<span class="n">Haldeur_Glas</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Haldeur Glas&#39;</span><span class="p">)</span>
+<span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glas_Enkel</span> <span class="p">)</span>
+<span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mf">1.70</span>
+<span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mf">0.62</span>
+<span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Haldeur_Rand</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Haldeur Rand&#39;</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Hout</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Lengte</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="p">(</span> <span class="p">(</span> <span class="n">Deur_Breedte</span> <span class="o">*</span> <span class="n">Deur_Hoogte</span> <span class="p">)</span> <span class="o">-</span> <span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Oppervlakte</span><span class="p">()</span> <span class="p">)</span> <span class="o">/</span> <span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Lengte</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Haldeur</span> <span class="o">=</span> <span class="n">Heat_Parallel_Object</span> <span class="p">(</span> <span class="s2">&quot;Haldeur&quot;</span><span class="p">)</span>
+<span class="n">Haldeur</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Haldeur_Rand</span> <span class="p">)</span>
+<span class="n">Haldeur</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Haldeur_Glas</span> <span class="p">)</span>
+<span class="n">Haldeur</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Haldeur</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+
+<span class="n">Haldeur_Glas2</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Haldeur Glas 2&#39;</span><span class="p">)</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Glas_Enkel</span> <span class="p">)</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Lucht_2cm</span> <span class="p">)</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">CarbonaatPlaat</span> <span class="p">)</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mf">1.70</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mf">0.62</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Haldeur_Glas2</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Haldeur_Rand2</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Haldeur Rand 2&#39;</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Hout</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">CarbonaatPlaat</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Lengte</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="p">(</span> <span class="p">(</span> <span class="n">Deur_Breedte</span> <span class="o">*</span> <span class="n">Deur_Hoogte</span> <span class="p">)</span> <span class="o">-</span> <span class="n">Haldeur_Glas</span><span class="o">.</span><span class="n">Oppervlakte</span><span class="p">()</span> <span class="p">)</span> <span class="o">/</span> <span class="n">Haldeur_Rand</span><span class="o">.</span><span class="n">Lengte</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Haldeur_Rand2</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Haldeur2</span> <span class="o">=</span> <span class="n">Heat_Parallel_Object</span> <span class="p">(</span> <span class="s2">&quot;Haldeur 2&quot;</span><span class="p">)</span>
+<span class="n">Haldeur2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Haldeur_Rand2</span> <span class="p">)</span>
+<span class="n">Haldeur2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Haldeur_Glas2</span> <span class="p">)</span>
+<span class="n">Haldeur2</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Haldeur2</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+
+
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Haldeur</span>  <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Haldeur2</span> <span class="p">)</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Name        = Haldeur
+Objects     = [ Haldeur Rand, Haldeur Glas, ]
+Oppervlakte = 1.7 [0.7, 1.1, ] [m2]
+R-Waarde    = 0.32 [ 0.5, 0.2, ] [m2.K/W]
+
+Name        = Haldeur 2
+Objects     = [ Haldeur Rand 2, Haldeur Glas 2, ]
+Oppervlakte = 1.7 [0.7, 1.1, ] [m2]
+R-Waarde    = 1.36 [ 1.1, 1.5, ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Keukendeur">Keukendeur<a class="anchor-link" href="#Keukendeur">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Lakboard</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Lakboard&quot;</span> <span class="p">)</span>  
+<span class="n">Lakboard</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Hardboard_Lambda</span>
+<span class="n">Lakboard</span><span class="o">.</span><span class="n">Dikte</span> <span class="o">=</span> <span class="mf">0.004</span>
+
+<span class="n">Lucht</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Lucht&quot;</span> <span class="p">)</span>  
+<span class="n">Lucht</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lucht_Lambda</span>
+<span class="n">Lucht</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Hout</span><span class="o">.</span><span class="n">Dikte</span>
+
+<span class="n">Keukendeur_Rand</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Keukendeur_Rand&#39;</span> <span class="p">)</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Lakboard</span> <span class="p">)</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Hout</span> <span class="p">)</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Lakboard</span> <span class="p">)</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">6</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mf">0.06</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Keukendeur_Kern</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Keukendeur_Kern&#39;</span> <span class="p">)</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Lakboard</span> <span class="p">)</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Lucht</span> <span class="p">)</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Lakboard</span> <span class="p">)</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="p">(</span> <span class="n">Deur_Breedte</span> <span class="o">*</span> <span class="n">Deur_Hoogte</span> <span class="p">)</span> <span class="o">-</span> <span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Oppervlakte</span><span class="p">()</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Keukendeur_Kern</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="n">Keukendeur</span> <span class="o">=</span> <span class="n">Heat_Parallel_Object</span> <span class="p">(</span> <span class="s2">&quot;Keukendeur&quot;</span><span class="p">)</span>
+<span class="n">Keukendeur</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Keukendeur_Rand</span> <span class="p">)</span>
+<span class="n">Keukendeur</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Keukendeur_Kern</span> <span class="p">)</span>
+<span class="n">Keukendeur</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Keukendeur</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Kruipruimte</span>
+
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Keukendeur</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Name        = Keukendeur
+Objects     = [ Keukendeur_Rand, Keukendeur_Kern, ]
+Oppervlakte = 1.7 [0.4, 1.4, ] [m2]
+R-Waarde    = 1.64 [ 0.6, 1.9, ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tuindeuren">Tuindeuren<a class="anchor-link" href="#Tuindeuren">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Opp_Totaal</span> <span class="o">=</span> <span class="mf">1.70</span> <span class="o">*</span> <span class="mf">2.10</span>
+<span class="n">Opp_Ruiten</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="mf">1.6</span>
+<span class="n">Opp_Hout</span>   <span class="o">=</span> <span class="n">Opp_Totaal</span> <span class="o">-</span> <span class="n">Opp_Ruiten</span>
+
+<span class="n">Tuindeur_Hout</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Tuindeur_Hout&quot;</span> <span class="p">)</span>  
+<span class="n">Tuindeur_Hout</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Hardhout_Lambda</span>
+<span class="n">Tuindeur_Hout</span><span class="o">.</span><span class="n">Dikte</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+<span class="n">Tuindeuren</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Tuindeuren&#39;</span> <span class="p">)</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Tuindeur_Hout</span> <span class="p">)</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="p">(</span> <span class="n">Deur_Breedte</span> <span class="o">*</span> <span class="n">Deur_Hoogte</span> <span class="p">)</span> <span class="o">-</span> <span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Oppervlakte</span><span class="p">()</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Tuindeuren</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+
+<span class="n">Tuindeuren2</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Tuindeuren 2&#39;</span> <span class="p">)</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Tuindeur_Hout</span> <span class="p">)</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">PIR_alu_2cm</span> <span class="p">)</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="p">(</span> <span class="n">Deur_Breedte</span> <span class="o">*</span> <span class="n">Deur_Hoogte</span> <span class="p">)</span> <span class="o">-</span> <span class="n">Keukendeur_Rand</span><span class="o">.</span><span class="n">Oppervlakte</span><span class="p">()</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Tuindeuren2</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Tuindeuren</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Tuindeuren2</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Name        = Tuindeuren
+Layers    = [ Rsi, Tuindeur_Hout, Rsi,  ]
+R-Waarden = 0.50 [ 0.13, 0.24, 0.13,  ] [m2.K/W]
+
+Name        = Tuindeuren 2
+Layers    = [ Rsi, Tuindeur_Hout, PIR_alu_2cm, Rsi,  ]
+R-Waarden = 1.41 [ 0.13, 0.24, 0.91, 0.13,  ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Warmwater">Warmwater<a class="anchor-link" href="#Warmwater">&#182;</a></h2><p>We hebben een schatting gemaakt van het warmwaterverbuik, zodat we het totaal berekende gasverbruik kunnen vergelijken met het echte gasverbruik.
+<br>Het is natuurlijk lastig om Boiler verbruik en het echte warmwater gebruik uit elkaar te houden.
+<br>Het waterverbruik van een douchebeurt ligt tussen de 20 en 40 liter.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Water_Warmte_Capaciteit</span> <span class="o">=</span> <span class="mf">1.16E-3</span> <span class="c1"># kWh / ( Celsius * liter )</span>
+<span class="n">Warm_Water_Liter</span>        <span class="o">=</span> <span class="mi">8000</span>    <span class="c1"># ( 2 personen, 2 keer per week, 40 liter )</span>
+<span class="n">Warm_Water_deltaT</span>       <span class="o">=</span> <span class="mi">50</span>
+<span class="n">Douche_m3</span>               <span class="o">=</span> <span class="mi">40</span> <span class="o">*</span> <span class="n">Warm_Water_deltaT</span> <span class="o">*</span> <span class="n">Water_Warmte_Capaciteit</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">Warm_Water_Verbruik_kWh</span> <span class="o">=</span> <span class="n">Warm_Water_Liter</span> <span class="o">*</span> <span class="n">Warm_Water_deltaT</span> <span class="o">*</span> <span class="n">Water_Warmte_Capaciteit</span>
+<span class="n">Warm_Water_Verbruik_m3</span>  <span class="o">=</span> <span class="n">Warm_Water_Verbruik_kWh</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Douchebeurt = </span><span class="si">%.2f</span><span class="s2"> [m3]&quot;</span> <span class="o">%</span> <span class="n">Douche_m3</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Warm Water per jaar = </span><span class="si">%i</span><span class="s2"> [m3]&quot;</span> <span class="o">%</span> <span class="n">Warm_Water_Verbruik_m3</span> <span class="p">)</span>
+
+<span class="c1"># Boiler wordt 4 tot 5 keer per dag opgewarmd, </span>
+<span class="c1"># opwarmen duurt 4 tot 5 minuten, </span>
+<span class="c1"># waarbij de ketel gemiddeld op 60% draait</span>
+<span class="n">Boiler_Dag_kWh</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">60</span> <span class="p">)</span>
+<span class="n">Boiler_Dag_m3</span>  <span class="o">=</span> <span class="n">Boiler_Dag_kWh</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">Boiler_m3</span>      <span class="o">=</span> <span class="mi">365</span> <span class="o">*</span> <span class="n">Boiler_Dag_m3</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Boiler max :  per dag = </span><span class="si">%.2f</span><span class="s2"> [m3] //  per jaar = </span><span class="si">%i</span><span class="s2"> [m3]&quot;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">Boiler_Dag_m3</span><span class="p">,</span> <span class="n">Boiler_m3</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">Boiler_Dag_kWh</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="p">(</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">60</span> <span class="p">)</span>
+<span class="n">Boiler_Dag_m3</span>  <span class="o">=</span> <span class="n">Boiler_Dag_kWh</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">Boiler_m3</span>      <span class="o">=</span> <span class="mi">365</span> <span class="o">*</span> <span class="n">Boiler_Dag_m3</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Boiler min :  per dag = </span><span class="si">%.2f</span><span class="s2"> [m3] //  per jaar = </span><span class="si">%i</span><span class="s2"> [m3]&quot;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">Boiler_Dag_m3</span><span class="p">,</span> <span class="n">Boiler_m3</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="n">Boiler_Object</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Boiler Object&quot;</span> <span class="p">)</span>
+<span class="n">Boiler_Object</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">Boiler</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Boiler&#39;</span> <span class="p">)</span>
+<span class="n">Boiler</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Boiler_Object</span> <span class="p">)</span>
+<span class="n">Boiler</span><span class="o">.</span><span class="n">Dummy</span>               <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Boiler</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">23</span>
+<span class="n">Boiler</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Boiler</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">80</span>
+<span class="n">Boiler</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">Boiler_WEG</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Boiler WEG&#39;</span> <span class="p">)</span>
+<span class="n">Boiler_WEG</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Boiler_Object</span> <span class="p">)</span>
+<span class="n">Boiler_WEG</span><span class="o">.</span><span class="n">Dummy</span>               <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Boiler_WEG</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Boiler_WEG</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Boiler_WEG</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">80</span>
+<span class="n">Boiler_WEG</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">WW_Object</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;WW Object&quot;</span> <span class="p">)</span>
+<span class="n">WW_Object</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">Warm_Water</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s1">&#39;Warm Water&#39;</span> <span class="p">)</span>
+<span class="n">Warm_Water</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">WW_Object</span> <span class="p">)</span>
+<span class="n">Warm_Water</span><span class="o">.</span><span class="n">Dummy</span>               <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Warm_Water</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mf">7.5</span>
+<span class="n">Warm_Water</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Warm_Water</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">80</span>
+<span class="n">Warm_Water</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Douchebeurt = 0.23 [m3]
+Warm Water per jaar = 46 [m3]
+Boiler max :  per dag = 0.60 [m3] //  per jaar = 219 [m3]
+Boiler min :  per dag = 0.38 [m3] //  per jaar = 140 [m3]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Ventilatie">Ventilatie<a class="anchor-link" href="#Ventilatie">&#182;</a></h2><p>Dit is een stuk hoger dan de oude praktijkrichtlijn NPR 1089 (20 m3 /h/pp) en de aanbevolen luchtverversing van 25 m3 /h/pp van de Gezondheidsraad uit 1984. 
+<br>Bron:  <a href="https://www.co2indicator.nl/documentatie/Nieuw%20Bouwbesluit%20gaat%20voorbij%20aan%20gezond%20binnenmilieu.pdf">https://www.co2indicator.nl/documentatie/Nieuw%20Bouwbesluit%20gaat%20voorbij%20aan%20gezond%20binnenmilieu.pdf</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Lucht_Gewicht</span> <span class="o">=</span> <span class="mf">1.3</span>  <span class="c1"># [kg/m3]</span>
+<span class="n">Lucht_Warmte_Capaciteit</span> <span class="o">=</span> <span class="mi">1005</span>  <span class="c1"># cp (bij constante druk) [J/kg*K]</span>
+
+<span class="n">Ventilatie_Flow</span> <span class="o">=</span> <span class="mi">25</span>   <span class="c1"># per persoon in [m3/hr]</span>
+<span class="c1"># Gedurende 24 uur, 50 m3/hr verversen is ruim voldoende voor 2 personen</span>
+
+<span class="n">Gewicht_50</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">Lucht_Gewicht</span>
+
+<span class="n">Joule_per_Kelvin</span> <span class="o">=</span> <span class="n">Gewicht_50</span> <span class="o">*</span> <span class="n">Lucht_Warmte_Capaciteit</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Joule_per_Kelvin</span> <span class="p">)</span>
+<span class="n">Watt_per_Kelvin</span> <span class="o">=</span> <span class="n">Joule_per_Kelvin</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Watt_per_Kelvin</span> <span class="p">)</span>
+
+<span class="n">Ventilatie</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Ventilatie&quot;</span> <span class="p">)</span>
+<span class="n">Ventilatie</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="n">Watt_per_Kelvin</span>
+
+<span class="n">Ventilatie_Nu</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Ventilatie_Nu&quot;</span> <span class="p">)</span>
+<span class="n">Ventilatie_Nu</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Ventilatie</span> <span class="p">)</span>
+<span class="n">Ventilatie_Nu</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Ventilatie_Nu</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Ventilatie_Nu</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Ventilatie_Nu</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+
+<span class="n">Ventilatie_2</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Ventilatie_2&quot;</span> <span class="p">)</span>
+<span class="n">Ventilatie_2</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="n">Watt_per_Kelvin</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">Ventilatie_WTW</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Ventilatie WTW&quot;</span> <span class="p">)</span>
+<span class="n">Ventilatie_WTW</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Ventilatie_2</span> <span class="p">)</span>
+<span class="n">Ventilatie_WTW</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Ventilatie_WTW</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Ventilatie_WTW</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
+<span class="n">Ventilatie_WTW</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
+
+<span class="n">Base_Heat</span><span class="o">.</span><span class="n">PrintLevel</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Ventilatie_Nu</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Ventilatie_WTW</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>65325.0
+18.145833333333332
+Name        = Ventilatie_Nu
+Layers    = [ Ventilatie,  ]
+R-Waarden = 0.06 [ 0.06,  ] [m2.K/W]
+
+Name        = Ventilatie WTW
+Layers    = [ Ventilatie_2,  ]
+R-Waarden = 0.11 [ 0.11,  ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Koelkast-+-Vriezer">Koelkast + Vriezer<a class="anchor-link" href="#Koelkast-+-Vriezer">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Koelkast_Verbruik</span> <span class="o">=</span> <span class="mi">103</span>  <span class="c1"># [kWh/jaar]  # AEG  S52500KSW0</span>
+<span class="n">Vriezer_Verbruik</span>  <span class="o">=</span> <span class="mi">143</span>  <span class="c1"># [kWh/jaar]  # Zanker VK202</span>
+
+<span class="n">Koelkast_1</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Koelkast Object&quot;</span> <span class="p">)</span>
+<span class="n">Koelkast_1</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.65</span>
+
+<span class="n">Vriezer_1</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Vriezer Object&quot;</span> <span class="p">)</span>
+<span class="n">Vriezer_1</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.45</span>
+
+<span class="n">Koelkast</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Koelkast&quot;</span> <span class="p">)</span>
+<span class="n">Koelkast</span><span class="o">.</span><span class="n">Dummy</span>               <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Koelkast</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Koelkast_1</span> <span class="p">)</span>
+<span class="n">Koelkast</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Koelkast</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Koelkast</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">20</span>
+<span class="n">Koelkast</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">Vriezer</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Vriezer&quot;</span> <span class="p">)</span>
+<span class="n">Vriezer</span><span class="o">.</span><span class="n">Dummy</span>               <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Vriezer</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Vriezer_1</span> <span class="p">)</span>
+<span class="n">Vriezer</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Vriezer</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Vriezer</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">20</span>
+<span class="n">Vriezer</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">Koelingen</span> <span class="o">=</span> <span class="n">Heat_Parallel_Object</span> <span class="p">(</span> <span class="s2">&quot;Koelingen&quot;</span><span class="p">)</span>
+<span class="n">Koelingen</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Koelkast</span> <span class="p">)</span>
+<span class="n">Koelingen</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Vriezer</span> <span class="p">)</span>
+<span class="n">Koelingen</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">20</span>
+<span class="n">Koelingen</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">Base_Heat</span><span class="o">.</span><span class="n">PrintLevel</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Koelingen</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Name        = Koelingen
+Oppervlakte = 2.0 [m2]
+R-Waarde    = 0.55 [m2.K/W]
+U-Waarde    = 1.82 [W/m2.K]
+T-Inside    = 20.0 [Celsius]
+T-Outside   = 0.0 [Celsius]
+Heat Loss 1m2   = 36 [W]
+Energy Cost 1m2 = 6.98 [Euro]
+Gasprijs        = 0.80 [Euro]
+Objects     = [ Koelkast, Vriezer, ]
+Oppervlakte = 2.0 [1.0, 1.0, ] [m2]
+R-Waarde    = 0.55 [ 0.7, 0.5, ] [m2.K/W]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="PC's">PC's<a class="anchor-link" href="#PC's">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TV_W</span>    <span class="o">=</span> <span class="mi">46</span>
+<span class="n">TV_h</span>    <span class="o">=</span> <span class="mi">4</span>
+<span class="n">PC_S_W</span>  <span class="o">=</span> <span class="mi">85</span>  <span class="c1"># Met name monitor 75 Watt !!</span>
+<span class="n">PC_S_h</span>  <span class="o">=</span> <span class="mi">4</span>
+<span class="n">PC_B_W</span>  <span class="o">=</span> <span class="mi">20</span>
+<span class="n">PC_B_h</span>  <span class="o">=</span> <span class="mi">4</span>
+<span class="n">PC_MK_W</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">PC_MK_h</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="n">PCs_Totaal</span> <span class="o">=</span> <span class="mi">365</span> <span class="o">*</span> <span class="p">(</span> <span class="n">TV_W</span><span class="o">*</span><span class="n">TV_h</span> <span class="o">+</span> <span class="n">PC_S_W</span><span class="o">*</span><span class="n">PC_S_h</span> <span class="o">+</span> <span class="n">PC_B_W</span><span class="o">*</span><span class="n">PC_B_h</span> <span class="o">+</span> <span class="n">PC_MK_W</span><span class="o">*</span><span class="n">PC_MK_h</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">PCs_Totaal</span> <span class="p">)</span>
+
+<span class="n">PC_1</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;PC Object&quot;</span> <span class="p">)</span>
+<span class="n">PC_1</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.22</span>
+
+<span class="n">PCs</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;PCs + TV&quot;</span> <span class="p">)</span>
+<span class="n">PCs</span><span class="o">.</span><span class="n">Dummy</span>               <span class="o">=</span> <span class="kc">True</span>
+<span class="n">PCs</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">PC_1</span> <span class="p">)</span>
+<span class="n">PCs</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="mi">1</span>
+<span class="n">PCs</span><span class="o">.</span><span class="n">Hoogte</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">PCs</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="mi">20</span>
+<span class="n">PCs</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span> <span class="p">(</span> <span class="n">PCs</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>308.06
+Name        = PCs + TV
+Breedte     = -1 [m]
+Hoogte      = 1 [m]
+Oppervlakte = 1.0 [m2]
+R-Waarde    = 0.22 [m2.K/W]
+U-Waarde    = 4.55 [W/m2.K]
+T-Inside    = 20.0 [Celsius]
+T-Outside   = 0.0 [Celsius]
+Heat Loss 1m2   = 90 [W]
+Energy Cost 1m2 = 17.45 [Euro]
+Gasprijs        = 0.80 [Euro]
+Layers    = [ PC Object,  ]
+Dikten    = [ -,  ] [cm]
+R-Waarden = 0.22 [ 0.22,  ] [m2.K/W]
+U-Waarden = 4.55 [ 4.55,  ] [W/m2.K]
+T-Inside  = 20.0 [Celsius]
+T-Outside = 0.0 [Celsius]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Kamer-Nu">Kamer Nu<a class="anchor-link" href="#Kamer-Nu">&#182;</a></h2><p><img src="Verbruik_2018.png"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ts</span>  <span class="o">=</span> <span class="nb">range</span> <span class="p">(</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="n">Elements</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Vloer</span><span class="p">,</span> <span class="n">Buitenmuur_Nu</span><span class="p">,</span> <span class="n">Binnenmuur_Spouw_Nu</span><span class="p">,</span> <span class="n">Binnenmuur_Enkel_Nu</span><span class="p">,</span> <span class="n">Ramen_Nu</span><span class="p">,</span> <span class="n">Kozijnen</span><span class="p">,</span>  
+             <span class="n">Plafond</span><span class="p">,</span> <span class="n">Tuindeuren</span><span class="p">,</span> <span class="n">Haldeur</span><span class="p">,</span> <span class="n">Keukendeur</span><span class="p">,</span> <span class="n">Boiler</span><span class="p">,</span> <span class="n">Warm_Water</span><span class="p">,</span> <span class="n">Ventilatie_Nu</span><span class="p">,</span>
+             <span class="n">Koelingen</span><span class="p">,</span> <span class="n">PCs</span> <span class="p">]</span>
 <span class="n">Heat_Transfer_Table</span> <span class="p">(</span> <span class="n">Elements</span><span class="p">,</span> <span class="n">Ts</span> <span class="p">)</span>
 </pre></div>
 
@@ -12284,7 +13141,7 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -12315,21 +13172,75 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
       <th>Kosten-m2</th>
       <th>Kosten</th>
       <th>Jaar-m3</th>
-      <th>-8</th>
-      <th>-6</th>
-      <th>-4</th>
-      <th>-2</th>
+      <th>-5</th>
       <th>0</th>
-      <th>2</th>
-      <th>4</th>
-      <th>6</th>
-      <th>8</th>
+      <th>5</th>
       <th>10</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>HR glas</th>
+      <th>Woonkamer.Vloer</th>
+      <td>3.39</td>
+      <td>0.29</td>
+      <td>49</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.57</td>
+      <td>76</td>
+      <td>96</td>
+      <td>361</td>
+      <td>288</td>
+      <td>216</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <th>Buitenmuur_Nu</th>
+      <td>1.94</td>
+      <td>0.51</td>
+      <td>23.5</td>
+      <td>20</td>
+      <td>0</td>
+      <td>2.73</td>
+      <td>64</td>
+      <td>80</td>
+      <td>301</td>
+      <td>241</td>
+      <td>180</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>Binnenmuur Spouw Nu</th>
+      <td>2.03</td>
+      <td>0.49</td>
+      <td>25</td>
+      <td>20</td>
+      <td>8</td>
+      <td>2.61</td>
+      <td>65</td>
+      <td>81</td>
+      <td>306</td>
+      <td>245</td>
+      <td>183</td>
+      <td>122</td>
+    </tr>
+    <tr>
+      <th>Binnenmuur Enkel</th>
+      <td>0.36</td>
+      <td>2.77</td>
+      <td>10</td>
+      <td>20</td>
+      <td>8</td>
+      <td>14.79</td>
+      <td>147</td>
+      <td>184</td>
+      <td>694</td>
+      <td>555</td>
+      <td>416</td>
+      <td>277</td>
+    </tr>
+    <tr>
+      <th>Ramen Nu</th>
       <td>0.35</td>
       <td>2.8</td>
       <td>12.25</td>
@@ -12338,79 +13249,10 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
       <td>14.91</td>
       <td>182</td>
       <td>228</td>
-      <td>960</td>
-      <td>891</td>
-      <td>823</td>
-      <td>754</td>
+      <td>857</td>
       <td>686</td>
-      <td>617</td>
-      <td>548</td>
-      <td>480</td>
-      <td>411</td>
+      <td>514</td>
       <td>343</td>
-    </tr>
-    <tr>
-      <th>HR++ glas</th>
-      <td>0.9</td>
-      <td>1.1</td>
-      <td>12.25</td>
-      <td>20</td>
-      <td>0</td>
-      <td>5.85</td>
-      <td>71</td>
-      <td>89</td>
-      <td>377</td>
-      <td>350</td>
-      <td>323</td>
-      <td>296</td>
-      <td>269</td>
-      <td>242</td>
-      <td>215</td>
-      <td>188</td>
-      <td>161</td>
-      <td>134</td>
-    </tr>
-    <tr>
-      <th>HR+++ glas</th>
-      <td>2</td>
-      <td>0.5</td>
-      <td>12.25</td>
-      <td>20</td>
-      <td>0</td>
-      <td>2.66</td>
-      <td>32</td>
-      <td>40</td>
-      <td>171</td>
-      <td>159</td>
-      <td>147</td>
-      <td>134</td>
-      <td>122</td>
-      <td>110</td>
-      <td>98</td>
-      <td>85</td>
-      <td>73</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>Kozijn Merbau</th>
-      <td>0.83</td>
-      <td>1.19</td>
-      <td>2.77</td>
-      <td>20</td>
-      <td>0</td>
-      <td>6.36</td>
-      <td>17</td>
-      <td>22</td>
-      <td>92</td>
-      <td>86</td>
-      <td>79</td>
-      <td>72</td>
-      <td>66</td>
-      <td>59</td>
-      <td>53</td>
-      <td>46</td>
-      <td>39</td>
-      <td>33</td>
     </tr>
     <tr>
       <th>Kozijn Dark Red Meranti</th>
@@ -12422,58 +13264,145 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
       <td>5.78</td>
       <td>16</td>
       <td>20</td>
-      <td>84</td>
-      <td>78</td>
-      <td>72</td>
-      <td>66</td>
+      <td>75</td>
       <td>60</td>
-      <td>54</td>
-      <td>48</td>
-      <td>42</td>
-      <td>36</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>Kozijn Grenen</th>
-      <td>1.09</td>
-      <td>0.91</td>
-      <td>2.77</td>
-      <td>20</td>
-      <td>0</td>
-      <td>4.87</td>
-      <td>13</td>
-      <td>16</td>
-      <td>71</td>
-      <td>65</td>
-      <td>60</td>
-      <td>55</td>
-      <td>50</td>
       <td>45</td>
-      <td>40</td>
-      <td>35</td>
       <td>30</td>
-      <td>25</td>
     </tr>
     <tr>
-      <th>Kozijn Vuren</th>
-      <td>1.26</td>
-      <td>0.79</td>
-      <td>2.77</td>
+      <th>Plafond</th>
+      <td>0.46</td>
+      <td>2.16</td>
+      <td>49</td>
+      <td>20</td>
+      <td>8</td>
+      <td>11.51</td>
+      <td>564</td>
+      <td>705</td>
+      <td>2649</td>
+      <td>2119</td>
+      <td>1589</td>
+      <td>1059</td>
+    </tr>
+    <tr>
+      <th>Tuindeuren</th>
+      <td>0.49</td>
+      <td>2.01</td>
+      <td>1.38</td>
       <td>20</td>
       <td>0</td>
-      <td>4.22</td>
-      <td>11</td>
+      <td>10.75</td>
       <td>14</td>
-      <td>61</td>
-      <td>57</td>
-      <td>52</td>
-      <td>48</td>
-      <td>43</td>
-      <td>39</td>
-      <td>35</td>
-      <td>30</td>
+      <td>18</td>
+      <td>69</td>
+      <td>55</td>
+      <td>41</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>Haldeur</th>
+      <td>0.32</td>
+      <td>3.1</td>
+      <td>1.74</td>
+      <td>20</td>
+      <td>8</td>
+      <td>7.38</td>
+      <td>12</td>
+      <td>36</td>
+      <td>135</td>
+      <td>108</td>
+      <td>81</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>Keukendeur</th>
+      <td>1.64</td>
+      <td>0.6</td>
+      <td>1.74</td>
+      <td>20</td>
+      <td>8</td>
+      <td>2.11</td>
+      <td>3</td>
+      <td>7</td>
       <td>26</td>
       <td>21</td>
+      <td>15</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>Boiler</th>
+      <td>1</td>
+      <td>1</td>
+      <td>23</td>
+      <td>80</td>
+      <td>0</td>
+      <td>5.32</td>
+      <td>122</td>
+      <td>153</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Warm Water</th>
+      <td>1</td>
+      <td>1</td>
+      <td>7.5</td>
+      <td>80</td>
+      <td>0</td>
+      <td>5.32</td>
+      <td>39</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Ventilatie_Nu</th>
+      <td>0.05</td>
+      <td>18.14</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>96.64</td>
+      <td>96</td>
+      <td>120</td>
+      <td>453</td>
+      <td>362</td>
+      <td>272</td>
+      <td>181</td>
+    </tr>
+    <tr>
+      <th>Koelingen</th>
+      <td>0.55</td>
+      <td>1.81</td>
+      <td>2</td>
+      <td>20</td>
+      <td>0</td>
+      <td>4.84</td>
+      <td>9</td>
+      <td>24</td>
+      <td>90</td>
+      <td>72</td>
+      <td>54</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>PCs + TV</th>
+      <td>0.22</td>
+      <td>4.54</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>24.2</td>
+      <td>24</td>
+      <td>30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>Totaal</th>
@@ -12483,18 +13412,12 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
       <td>T-Binnen</td>
       <td>T-Buiten</td>
       <td>Kosten-m2</td>
-      <td>342</td>
-      <td>429</td>
-      <td>1816</td>
-      <td>1686</td>
-      <td>1556</td>
-      <td>1425</td>
-      <td>1296</td>
-      <td>1166</td>
-      <td>1037</td>
-      <td>906</td>
-      <td>776</td>
-      <td>647</td>
+      <td>1433</td>
+      <td>1831</td>
+      <td>6016</td>
+      <td>4812</td>
+      <td>3606</td>
+      <td>2403</td>
     </tr>
   </tbody>
 </table>
@@ -12511,20 +13434,645 @@ R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusie">Conclusie<a class="anchor-link" href="#Conclusie">&#182;</a></h2><p>HR++ glas is ongeveer 3 keer beter dan HR glas.
-<br>HR++= glas is ongeveer 6 keer beter dan HR glas.</p>
-<p>Vanuit: <a href="https://www.verbouwkosten.com/dubbel-glas/kosten/#Per-m2">https://www.verbouwkosten.com/dubbel-glas/kosten/#Per-m2</a>
-<br>Van thermopane (het oude gewone dubbel glas) naar HR++ glas bespaart 10m3 gas / m2, hetgeen overeenkomt met 8 Euro / m2.
-<br>Installatie kost (exclusief afvoer en schilderen) 135 Euro / m2, wat neer komt op een terugverdientijd van 17 jaar !!
-<br>De kosten bestaan ruwweg voor de helft uit materiaalkosten en voor de helft uit arbeidskosten. Als we nu inschatten dat het schilderwerk ook nog eens dezelfde arbeidskosten vereist, komen we in totaal op een terugverdientijd van ongeveer 25 jaar.</p>
-<p>Op basis van mijn eigen berekeningen kom ik nog iets ongunstiger uit, namelijk een besparing van 6.5 Eur / m2,
-oftewel een terugverdientijd van 20 jaar zonder schilderwerk en 30 jaar met schilderwerk!!!</p>
-<p>Bij zelfdoen kom je dus uit op ongeveer de helft van de kosten en dus ook op ongeveer de helft van de terugverdientijd.</p>
-<p>Dus gooi het over de boeg van comfort !!!!
-<br><img src="Glas_Temperaturen.png" width="50%" height="5%"></p>
-<p>Daarnaast is het waarschijnlijk interessant om (als het kozijn dat toelaat), meteen over te gaan naar HR+++ glas)</p>
-<p>Kozijnen maken toch een substantieel deel uit van het totale buitenoppervlak, in het algemeen 15 .. 20 % en in mijn geval zelfs 23% van het glas oppervlak. Op websites van leveranciers van kozijnen wordt vaak gerekend met een forfaitaire waarde van de isolatie-waarde van hout, waardoor een te slechte voorstelling van zaken wordt gegeven. Zoals de table hierboven laat zien, hebben alle houtsoorten een vergelijkbaarwarmteverlies als HR++ glas. Alleen in het geval dat HR+++ glas wordt genomen dienen andere kozijnen gebruikt te worden. De economische besparing van betere kozijnen bedraagt in mijn geval ongeveer 10 Euro per jaar.</p>
+<h2 id="Geisoleerd-Plafond">Geisoleerd Plafond<a class="anchor-link" href="#Geisoleerd-Plafond">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ts</span>  <span class="o">=</span> <span class="nb">range</span> <span class="p">(</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="n">Elements</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Vloer</span><span class="p">,</span> <span class="n">Buitenmuur_Nu</span><span class="p">,</span> <span class="n">Binnenmuur_Spouw_Nu</span><span class="p">,</span> <span class="n">Binnenmuur_Enkel_Nu</span><span class="p">,</span> <span class="n">Ramen_Nu</span><span class="p">,</span> <span class="n">Kozijnen</span><span class="p">,</span> 
+             <span class="n">Plafond_New</span><span class="p">,</span> <span class="n">Tuindeuren</span><span class="p">,</span> <span class="n">Haldeur</span><span class="p">,</span> <span class="n">Keukendeur</span><span class="p">,</span> <span class="n">Boiler</span><span class="p">,</span> <span class="n">Warm_Water</span><span class="p">,</span> <span class="n">Ventilatie_Nu</span><span class="p">,</span>
+             <span class="n">Koelingen</span><span class="p">,</span> <span class="n">PCs</span> <span class="p">]</span>
+<span class="n">Heat_Transfer_Table</span> <span class="p">(</span> <span class="n">Elements</span><span class="p">,</span> <span class="n">Ts</span> <span class="p">)</span>
+</pre></div>
 
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[18]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R-waarde</th>
+      <th>U-waarde</th>
+      <th>Oppervlak</th>
+      <th>T-Binnen</th>
+      <th>T-Buiten</th>
+      <th>Kosten-m2</th>
+      <th>Kosten</th>
+      <th>Jaar-m3</th>
+      <th>-5</th>
+      <th>0</th>
+      <th>5</th>
+      <th>10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Woonkamer.Vloer</th>
+      <td>3.39</td>
+      <td>0.29</td>
+      <td>49</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.57</td>
+      <td>76</td>
+      <td>96</td>
+      <td>361</td>
+      <td>288</td>
+      <td>216</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <th>Buitenmuur_Nu</th>
+      <td>1.94</td>
+      <td>0.51</td>
+      <td>23.5</td>
+      <td>20</td>
+      <td>0</td>
+      <td>2.73</td>
+      <td>64</td>
+      <td>80</td>
+      <td>301</td>
+      <td>241</td>
+      <td>180</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>Binnenmuur Spouw Nu</th>
+      <td>2.03</td>
+      <td>0.49</td>
+      <td>25</td>
+      <td>20</td>
+      <td>8</td>
+      <td>2.61</td>
+      <td>65</td>
+      <td>81</td>
+      <td>306</td>
+      <td>245</td>
+      <td>183</td>
+      <td>122</td>
+    </tr>
+    <tr>
+      <th>Binnenmuur Enkel</th>
+      <td>0.36</td>
+      <td>2.77</td>
+      <td>10</td>
+      <td>20</td>
+      <td>8</td>
+      <td>14.79</td>
+      <td>147</td>
+      <td>184</td>
+      <td>694</td>
+      <td>555</td>
+      <td>416</td>
+      <td>277</td>
+    </tr>
+    <tr>
+      <th>Ramen Nu</th>
+      <td>0.35</td>
+      <td>2.8</td>
+      <td>12.25</td>
+      <td>20</td>
+      <td>0</td>
+      <td>14.91</td>
+      <td>182</td>
+      <td>228</td>
+      <td>857</td>
+      <td>686</td>
+      <td>514</td>
+      <td>343</td>
+    </tr>
+    <tr>
+      <th>Kozijn Dark Red Meranti</th>
+      <td>0.92</td>
+      <td>1.08</td>
+      <td>2.77</td>
+      <td>20</td>
+      <td>0</td>
+      <td>5.78</td>
+      <td>16</td>
+      <td>20</td>
+      <td>75</td>
+      <td>60</td>
+      <td>45</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>Plafond_New</th>
+      <td>2.79</td>
+      <td>0.35</td>
+      <td>49</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.9</td>
+      <td>93</td>
+      <td>116</td>
+      <td>438</td>
+      <td>350</td>
+      <td>263</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>Tuindeuren</th>
+      <td>0.49</td>
+      <td>2.01</td>
+      <td>1.38</td>
+      <td>20</td>
+      <td>0</td>
+      <td>10.75</td>
+      <td>14</td>
+      <td>18</td>
+      <td>69</td>
+      <td>55</td>
+      <td>41</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>Haldeur</th>
+      <td>0.32</td>
+      <td>3.1</td>
+      <td>1.74</td>
+      <td>20</td>
+      <td>8</td>
+      <td>7.38</td>
+      <td>12</td>
+      <td>36</td>
+      <td>135</td>
+      <td>108</td>
+      <td>81</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>Keukendeur</th>
+      <td>1.64</td>
+      <td>0.6</td>
+      <td>1.74</td>
+      <td>20</td>
+      <td>8</td>
+      <td>2.11</td>
+      <td>3</td>
+      <td>7</td>
+      <td>26</td>
+      <td>21</td>
+      <td>15</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>Boiler</th>
+      <td>1</td>
+      <td>1</td>
+      <td>23</td>
+      <td>80</td>
+      <td>0</td>
+      <td>5.32</td>
+      <td>122</td>
+      <td>153</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Warm Water</th>
+      <td>1</td>
+      <td>1</td>
+      <td>7.5</td>
+      <td>80</td>
+      <td>0</td>
+      <td>5.32</td>
+      <td>39</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Ventilatie_Nu</th>
+      <td>0.05</td>
+      <td>18.14</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>96.64</td>
+      <td>96</td>
+      <td>120</td>
+      <td>453</td>
+      <td>362</td>
+      <td>272</td>
+      <td>181</td>
+    </tr>
+    <tr>
+      <th>Koelingen</th>
+      <td>0.55</td>
+      <td>1.81</td>
+      <td>2</td>
+      <td>20</td>
+      <td>0</td>
+      <td>4.84</td>
+      <td>9</td>
+      <td>24</td>
+      <td>90</td>
+      <td>72</td>
+      <td>54</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>PCs + TV</th>
+      <td>0.22</td>
+      <td>4.54</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>24.2</td>
+      <td>24</td>
+      <td>30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Totaal</th>
+      <td>R-waarde</td>
+      <td>U-waarde</td>
+      <td>Oppervlak</td>
+      <td>T-Binnen</td>
+      <td>T-Buiten</td>
+      <td>Kosten-m2</td>
+      <td>962</td>
+      <td>1242</td>
+      <td>3805</td>
+      <td>3043</td>
+      <td>2280</td>
+      <td>1519</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overige-Besparingen">Overige Besparingen<a class="anchor-link" href="#Overige-Besparingen">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ts</span>  <span class="o">=</span> <span class="nb">range</span> <span class="p">(</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="n">Elements</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Vloer</span><span class="p">,</span> <span class="n">Buitenmuur_Na</span><span class="p">,</span> <span class="n">Binnenmuur_Spouw_Parels</span><span class="p">,</span> <span class="n">Binnenmuur_Enkel_PIR5</span><span class="p">,</span> <span class="n">Ramen_HRxx</span><span class="p">,</span> <span class="n">Kozijnen</span><span class="p">,</span>  
+             <span class="n">Plafond_New</span><span class="p">,</span> <span class="n">Tuindeuren2</span><span class="p">,</span> <span class="n">Haldeur2</span><span class="p">,</span> <span class="n">Keukendeur</span><span class="p">,</span> <span class="n">Boiler_WEG</span><span class="p">,</span> <span class="n">Warm_Water</span><span class="p">,</span> <span class="n">Ventilatie_WTW</span><span class="p">,</span>
+             <span class="n">Koelingen</span><span class="p">,</span> <span class="n">PCs</span> <span class="p">]</span>
+<span class="n">Heat_Transfer_Table</span> <span class="p">(</span> <span class="n">Elements</span><span class="p">,</span> <span class="n">Ts</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[19]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R-waarde</th>
+      <th>U-waarde</th>
+      <th>Oppervlak</th>
+      <th>T-Binnen</th>
+      <th>T-Buiten</th>
+      <th>Kosten-m2</th>
+      <th>Kosten</th>
+      <th>Jaar-m3</th>
+      <th>-5</th>
+      <th>0</th>
+      <th>5</th>
+      <th>10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Woonkamer.Vloer</th>
+      <td>3.39</td>
+      <td>0.29</td>
+      <td>49</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.57</td>
+      <td>76</td>
+      <td>96</td>
+      <td>361</td>
+      <td>288</td>
+      <td>216</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <th>Buitenmuur Parels</th>
+      <td>3.24</td>
+      <td>0.3</td>
+      <td>23.5</td>
+      <td>20</td>
+      <td>0</td>
+      <td>1.63</td>
+      <td>38</td>
+      <td>48</td>
+      <td>180</td>
+      <td>144</td>
+      <td>108</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <th>Binnenmuur Spouw Parels</th>
+      <td>3.33</td>
+      <td>0.29</td>
+      <td>25</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.59</td>
+      <td>39</td>
+      <td>49</td>
+      <td>187</td>
+      <td>149</td>
+      <td>112</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>Binnenmuur Enkel 5cm PIR</th>
+      <td>2.67</td>
+      <td>0.37</td>
+      <td>10</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.99</td>
+      <td>19</td>
+      <td>24</td>
+      <td>93</td>
+      <td>74</td>
+      <td>56</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>Ramen HR++</th>
+      <td>0.9</td>
+      <td>1.1</td>
+      <td>12.25</td>
+      <td>20</td>
+      <td>0</td>
+      <td>5.85</td>
+      <td>71</td>
+      <td>89</td>
+      <td>336</td>
+      <td>269</td>
+      <td>202</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <th>Kozijn Dark Red Meranti</th>
+      <td>0.92</td>
+      <td>1.08</td>
+      <td>2.77</td>
+      <td>20</td>
+      <td>0</td>
+      <td>5.78</td>
+      <td>16</td>
+      <td>20</td>
+      <td>75</td>
+      <td>60</td>
+      <td>45</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>Plafond_New</th>
+      <td>2.79</td>
+      <td>0.35</td>
+      <td>49</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1.9</td>
+      <td>93</td>
+      <td>116</td>
+      <td>438</td>
+      <td>350</td>
+      <td>263</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>Tuindeuren 2</th>
+      <td>1.4</td>
+      <td>0.71</td>
+      <td>1.38</td>
+      <td>20</td>
+      <td>0</td>
+      <td>3.79</td>
+      <td>5</td>
+      <td>6</td>
+      <td>24</td>
+      <td>19</td>
+      <td>14</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>Haldeur 2</th>
+      <td>1.36</td>
+      <td>0.73</td>
+      <td>1.74</td>
+      <td>20</td>
+      <td>8</td>
+      <td>2.02</td>
+      <td>3</td>
+      <td>8</td>
+      <td>32</td>
+      <td>25</td>
+      <td>19</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>Keukendeur</th>
+      <td>1.64</td>
+      <td>0.6</td>
+      <td>1.74</td>
+      <td>20</td>
+      <td>8</td>
+      <td>2.11</td>
+      <td>3</td>
+      <td>7</td>
+      <td>26</td>
+      <td>21</td>
+      <td>15</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>Boiler WEG</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>80</td>
+      <td>0</td>
+      <td>5.32</td>
+      <td>5</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Warm Water</th>
+      <td>1</td>
+      <td>1</td>
+      <td>7.5</td>
+      <td>80</td>
+      <td>0</td>
+      <td>5.32</td>
+      <td>39</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Ventilatie WTW</th>
+      <td>0.11</td>
+      <td>9.07</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>48.32</td>
+      <td>48</td>
+      <td>60</td>
+      <td>226</td>
+      <td>181</td>
+      <td>136</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>Koelingen</th>
+      <td>0.55</td>
+      <td>1.81</td>
+      <td>2</td>
+      <td>20</td>
+      <td>0</td>
+      <td>4.84</td>
+      <td>9</td>
+      <td>24</td>
+      <td>90</td>
+      <td>72</td>
+      <td>54</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>PCs + TV</th>
+      <td>0.22</td>
+      <td>4.54</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>24.2</td>
+      <td>24</td>
+      <td>30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Totaal</th>
+      <td>R-waarde</td>
+      <td>U-waarde</td>
+      <td>Oppervlak</td>
+      <td>T-Binnen</td>
+      <td>T-Buiten</td>
+      <td>Kosten-m2</td>
+      <td>488</td>
+      <td>632</td>
+      <td>2068</td>
+      <td>1652</td>
+      <td>1240</td>
+      <td>823</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="References">References<a class="anchor-link" href="#References">&#182;</a></h1>
 </div>
 </div>
 </div>

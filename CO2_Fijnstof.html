@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>WV_Glas</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>CO2_Fijnstof</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11791,8 +11791,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>19-02-2019, SM</p>
-
+<h1 id="CO2-en-Fijnstof">CO2 en Fijnstof<a class="anchor-link" href="#CO2-en-Fijnstof">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11800,16 +11799,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="WarmteVerlies-Glas">WarmteVerlies Glas<a class="anchor-link" href="#WarmteVerlies-Glas">&#182;</a></h1><p>In dit document worden een aantal mogelijke raamverbeteringen met elkaar vergeleken voor wat betreft het warmteverlies, de kosten en de terugverdientijd die hiermee samenhangen.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Uitgangspunten">Uitgangspunten<a class="anchor-link" href="#Uitgangspunten">&#182;</a></h2>
+<h2 id="Imports">Imports<a class="anchor-link" href="#Imports">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -11818,39 +11808,20 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Opp</span> <span class="o">=</span> <span class="mf">2.1</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">1.3</span><span class="o">*</span><span class="mf">2.5</span> <span class="o">+</span> <span class="mf">2.4</span><span class="o">*</span><span class="mf">1.3</span> <span class="o">+</span> <span class="mf">1.8</span><span class="o">*</span><span class="mf">2.1</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Totaal Oppervlakte = &quot;</span><span class="p">,</span> <span class="n">Opp</span> <span class="p">)</span>
-<span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
+<span class="c1">#%matplotlib inline</span>
 
-<span class="c1"># Veronderstelde temperaturen</span>
-<span class="n">Temperatuur_Binnen</span> <span class="o">=</span> <span class="mf">20.0</span>
-<span class="n">Temperatuur_Buiten</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span> <span class="p">(</span> <span class="s2">&quot;D:/Data_Python_25/MQTT&quot;</span> <span class="p">)</span>
+<span class="kn">from</span>   <span class="nn">mqttlog</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span>   <span class="nn">MQTT_Data_support</span> <span class="k">import</span> <span class="o">*</span>
 
-<span class="c1"># Voor de berekening van de kostenbesparing gaan we uit van het aantal graaddagen van het vorige jaar.</span>
-<span class="c1"># De gasprijs in [Euro] per m3:</span>
-<span class="n">Price_Gas</span> <span class="o">=</span> <span class="mf">0.80</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">7</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Totaal Oppervlakte =  12.25
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -11859,9 +11830,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Materiaal-Constanten">Materiaal Constanten<a class="anchor-link" href="#Materiaal-Constanten">&#182;</a></h2><p>Hieronder de definitie van de gebruikte materialen.
-<br>Iedere vorm om de warmtegeleiding op te geven is toegestaan ( R-waarde, U-waarde of Lambda + Dikte).</p>
-
+<h2 id="Get-data-over-selected-Periode">Get data over selected Periode<a class="anchor-link" href="#Get-data-over-selected-Periode">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -11870,55 +11839,45 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">Base_Heat</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">Base_Heat</span>
+<div class=" highlight hl-ipython3"><pre><span></span>  <span class="n">Start</span> <span class="o">=</span> <span class="s2">&quot;2019-02-20&quot;</span>
+  <span class="n">End</span>   <span class="o">=</span> <span class="s2">&quot;2019-02-25&quot;</span>
 
-<span class="c1"># luchtweerstand van de binnenmuur, zoals gedefinieerd in het bouwbesluit</span>
-<span class="n">Rsi</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rsi&quot;</span> <span class="p">)</span>
-<span class="n">Rsi</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.13</span>
+  <span class="n">Dir</span>   <span class="o">=</span> <span class="s2">&quot;//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02_/&quot;</span>
+  <span class="n">Data_a</span>  <span class="o">=</span> <span class="n">ReadMQTTDir</span> <span class="p">(</span> <span class="n">Dir</span><span class="p">,</span> <span class="n">ReadMQTT_NumberDict</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span> <span class="p">)</span> 
+  <span class="n">Data_a</span><span class="o">.</span><span class="n">drop</span> <span class="p">(</span> <span class="p">[</span> <span class="s2">&quot;Time_ms&quot;</span> <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+  <span class="n">Data_a</span><span class="o">.</span><span class="n">rename</span> <span class="p">(</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;BME280_Humidity&quot;</span><span class="p">:</span><span class="s2">&quot;RH&quot;</span><span class="p">,</span> <span class="s2">&quot;BME280_Pressure&quot;</span><span class="p">:</span><span class="s2">&quot;LuchtDruk&quot;</span><span class="p">,</span> 
+                              <span class="s2">&quot;BME280_Temperature&quot;</span><span class="p">:</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;MHZ14_CO2_ppm&quot;</span><span class="p">:</span><span class="s2">&quot;CO2_a&quot;</span> <span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
 
-<span class="c1"># luchtweerstand van de buitenmuur, zoals gedefinieerd in het bouwbesluit</span>
-<span class="n">Rse</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Rse&quot;</span> <span class="p">)</span>
-<span class="n">Rse</span><span class="o">.</span><span class="n">R_Waarde</span> <span class="o">=</span> <span class="mf">0.04</span>
+  <span class="n">Dir</span>   <span class="o">=</span> <span class="s2">&quot;//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02b_/&quot;</span>
+  <span class="n">Data_b</span>  <span class="o">=</span> <span class="n">ReadMQTTDir</span> <span class="p">(</span> <span class="n">Dir</span><span class="p">,</span> <span class="n">ReadMQTT_NumberDict</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span> <span class="p">)</span> 
+  <span class="n">Data_b</span><span class="o">.</span><span class="n">drop</span> <span class="p">(</span> <span class="p">[</span> <span class="s2">&quot;BME280_Humidity&quot;</span><span class="p">,</span> <span class="s2">&quot;BME280_Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;BME280_Temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;Time_ms&quot;</span> <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+  <span class="n">Data_b</span><span class="o">.</span><span class="n">rename</span> <span class="p">(</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;MHZ14_CO2_ppm&quot;</span><span class="p">:</span><span class="s2">&quot;CO2_b&quot;</span> <span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
 
-<span class="n">HR_Glas</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;HR glas&quot;</span> <span class="p">)</span> 
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="mf">2.8</span>
+  <span class="n">Dir</span>   <span class="o">=</span> <span class="s2">&quot;//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02c_/&quot;</span>
+  <span class="n">Data_c</span>  <span class="o">=</span> <span class="n">ReadMQTTDir</span> <span class="p">(</span> <span class="n">Dir</span><span class="p">,</span> <span class="n">ReadMQTT_NumberDict</span><span class="p">,</span> <span class="n">Start</span><span class="p">,</span> <span class="n">End</span> <span class="p">)</span> 
+  <span class="n">Data_c</span><span class="o">.</span><span class="n">drop</span> <span class="p">(</span> <span class="p">[</span> <span class="s2">&quot;BME280_Humidity&quot;</span><span class="p">,</span> <span class="s2">&quot;BME280_Pressure&quot;</span><span class="p">,</span> <span class="s2">&quot;BME280_Temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;Time_ms&quot;</span> <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+  <span class="n">Data_c</span><span class="o">.</span><span class="n">rename</span> <span class="p">(</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;MHZ14_CO2_ppm&quot;</span><span class="p">:</span><span class="s2">&quot;CO2_c&quot;</span> <span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
 
-<span class="n">HRxx_Glas</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;HR++ glas&quot;</span> <span class="p">)</span> 
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="mf">1.1</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Dir   = &quot;//Birgit-PC/mqttlog/huis/verdieping0/voortuin/FijnStof_2_/&quot;</span>
+<span class="sd">  Data_f  = ReadMQTTDir ( Dir, ReadMQTT_NumberDict, Start, End ) </span>
+<span class="sd">  Data_f.drop ( [&quot;sensordatavalues_0_value_type&quot;,&quot;sensordatavalues_1_value_type&quot;,</span>
+<span class="sd">                 &quot;sensordatavalues_2_value_type&quot;,&quot;sensordatavalues_3_value_type&quot;,</span>
+<span class="sd">                 &quot;sensordatavalues_2_value&quot;,&quot;sensordatavalues_3_value&quot;,</span>
+<span class="sd">                 &quot;software_version&quot;, &quot;SSID&quot;], axis=&quot;columns&quot;, inplace=True )</span>
+<span class="sd">  Data_f.rename ( columns = { &quot;sensordatavalues_0_value&quot;:&quot;PM10&quot;, &quot;sensordatavalues_1_value&quot;:&quot;PM2_5&quot; }, inplace = True )</span>
+<span class="sd">  Data_f.clip ( upper=50, inplace=True )</span>
 
-<span class="n">HRxxx_Glas</span> <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;HR+++ glas&quot;</span> <span class="p">)</span> 
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">U_Waarde</span> <span class="o">=</span> <span class="mf">0.5</span>
-
-<span class="c1">#print ( HR_Glas, HRxx_Glas, HRxxx_Glas )</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="HR-Glas">HR Glas<a class="anchor-link" href="#HR-Glas">&#182;</a></h2><p>Dit is het klassiek Thermopane glas van 30 jaar geleden.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HR_Glas</span><span class="o">.</span><span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>   <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">HR_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span>  <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">HR_Glas</span> <span class="p">)</span>
+<span class="sd">  #    { &quot;MHZ14_CO2_ppm&quot;:1474, &quot;Time_ms&quot;:2270000, &quot;BME280_Temperature&quot;:27.59, &quot;BME280_Pressure&quot;:1021, &quot;BME280_Humidity&quot;:41, &quot;DT28cc885500000050&quot;:25.00, &quot;DT285d4e91010000f4&quot;:25.50 }</span>
+<span class="sd">    # {&quot;software_version&quot;: &quot;NRZ-2017-100&quot;, </span>
+<span class="sd">    #  &quot;sensordatavalues&quot;:[{&quot;value_type&quot;:&quot;SDS_P1&quot;,&quot;value&quot;:&quot;12.16&quot;},</span>
+<span class="sd">    #                      {&quot;value_type&quot;:&quot;SDS_P2&quot;,&quot;value&quot;:&quot;8.38&quot;},</span>
+<span class="sd">    #                      {&quot;value_type&quot;:&quot;samples&quot;,&quot;value&quot;:&quot;198111550&quot;},</span>
+<span class="sd">    #                      {&quot;value_type&quot;:&quot;signal&quot;,&quot;value&quot;:&quot;-74&quot;}],</span>
+<span class="sd">    #  &quot;SSID&quot;:&quot;MiRa_Home_Router&quot;} </span>
+<span class="sd">    # — huis/verdieping0/voortuin/FijnStof_2_</span>
+<span class="sd">    # ********************************************************</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
 </div>
@@ -11935,19 +11894,64 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = HR glas
-Lengte      = 6.125 [m]
-Hoogte      = 2 [m]
-Oppervlakte = 12.2 [m2]
-R-Waarde    = 0.36 [m2.K/W]
-U-Waarde    = 2.80 [W/m2.K]
-T-Inside    = 20.0 [Celsius]
-T-Outside   = 0.0 [Celsius]
-Heat Loss   = 686 [W]
-Heat Loss 1m2   = 56 [W]
-Energy Cost 1m2 = 10.75 [Euro]
-Gasprijs        = 0.80 [Euro]
+<pre>//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02_\2019-02-20.mqttlog.gz   Error_Count = 1
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02_\2019-02-21.mqttlog.gz
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02_\2019-02-22.mqttlog
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02b_\2019-02-20.mqttlog.gz
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02b_\2019-02-21.mqttlog.gz
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02b_\2019-02-22.mqttlog
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02c_\2019-02-20.mqttlog.gz
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02c_\2019-02-21.mqttlog.gz
+//Birgit-PC/mqttlog/huis/verdieping0/ergens/Temperatuur_Kalibratie_02c_\2019-02-22.mqttlog
+</pre>
+</div>
+</div>
 
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;\nDir   = &#34;//Birgit-PC/mqttlog/huis/verdieping0/voortuin/FijnStof_2_/&#34;\nData_f  = ReadMQTTDir ( Dir, ReadMQTT_NumberDict, Start, End ) \nData_f.drop ( [&#34;sensordatavalues_0_value_type&#34;,&#34;sensordatavalues_1_value_type&#34;,\n               &#34;sensordatavalues_2_value_type&#34;,&#34;sensordatavalues_3_value_type&#34;,\n               &#34;sensordatavalues_2_value&#34;,&#34;sensordatavalues_3_value&#34;,\n               &#34;software_version&#34;, &#34;SSID&#34;], axis=&#34;columns&#34;, inplace=True )\nData_f.rename ( columns = { &#34;sensordatavalues_0_value&#34;:&#34;PM10&#34;, &#34;sensordatavalues_1_value&#34;:&#34;PM2_5&#34; }, inplace = True )\nData_f.clip ( upper=50, inplace=True )\n\n#    { &#34;MHZ14_CO2_ppm&#34;:1474, &#34;Time_ms&#34;:2270000, &#34;BME280_Temperature&#34;:27.59, &#34;BME280_Pressure&#34;:1021, &#34;BME280_Humidity&#34;:41, &#34;DT28cc885500000050&#34;:25.00, &#34;DT285d4e91010000f4&#34;:25.50 }\n  # {&#34;software_version&#34;: &#34;NRZ-2017-100&#34;, \n  #  &#34;sensordatavalues&#34;:[{&#34;value_type&#34;:&#34;SDS_P1&#34;,&#34;value&#34;:&#34;12.16&#34;},\n  #                      {&#34;value_type&#34;:&#34;SDS_P2&#34;,&#34;value&#34;:&#34;8.38&#34;},\n  #                      {&#34;value_type&#34;:&#34;samples&#34;,&#34;value&#34;:&#34;198111550&#34;},\n  #                      {&#34;value_type&#34;:&#34;signal&#34;,&#34;value&#34;:&#34;-74&#34;}],\n  #  &#34;SSID&#34;:&#34;MiRa_Home_Router&#34;} \n  # — huis/verdieping0/voortuin/FijnStof_2_\n  # ********************************************************\n&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span> <span class="n">Data_a</span><span class="o">.</span><span class="n">columns</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Data_b</span><span class="o">.</span><span class="n">columns</span> <span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span> <span class="n">Data_c</span><span class="o">.</span><span class="n">columns</span> <span class="p">)</span>
+<span class="c1">#print ( Data_f.columns )</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Index([&#39;RH&#39;, &#39;LuchtDruk&#39;, &#39;T&#39;, &#39;DT28cc885500000050&#39;, &#39;CO2_a&#39;], dtype=&#39;object&#39;)
+Index([&#39;CO2_b&#39;], dtype=&#39;object&#39;)
+Index([&#39;CO2_c&#39;], dtype=&#39;object&#39;)
 </pre>
 </div>
 </div>
@@ -11960,7 +11964,7 @@ Gasprijs        = 0.80 [Euro]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="HR++-Glas">HR++ Glas<a class="anchor-link" href="#HR++-Glas">&#182;</a></h2>
+<h2 id="Create-Plots">Create Plots<a class="anchor-link" href="#Create-Plots">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -11969,13 +11973,12 @@ Gasprijs        = 0.80 [Euro]
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
+<div class=" highlight hl-ipython3"><pre><span></span>  <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">7</span>
 
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>   <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">HRxx_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span>  <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">HRxx_Glas</span> <span class="p">)</span>
+  <span class="n">ax1</span> <span class="o">=</span> <span class="n">Data_a</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;RH&quot;</span> <span class="p">]</span> <span class="p">)</span>
+  <span class="n">ax2</span> <span class="o">=</span> <span class="n">Data_a</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;CO2_a&quot;</span> <span class="p">],</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span> <span class="p">)</span>
+  <span class="c1">#ax6 = Data_f.plot ( y = [ &quot;PM10&quot;, &quot;PM2_5&quot; ], ax=ax1 )</span>
+  <span class="n">Draw_Grids</span> <span class="p">(</span> <span class="n">ax1</span> <span class="p">)</span>    
 </pre></div>
 
 </div>
@@ -11991,48 +11994,36 @@ Gasprijs        = 0.80 [Euro]
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = HR++ glas
-Lengte      = 6.125 [m]
-Hoogte      = 2 [m]
-Oppervlakte = 12.2 [m2]
-R-Waarde    = 0.91 [m2.K/W]
-U-Waarde    = 1.10 [W/m2.K]
-T-Inside    = 20.0 [Celsius]
-T-Outside   = 0.0 [Celsius]
-Heat Loss   = 269 [W]
-Heat Loss 1m2   = 22 [W]
-Energy Cost 1m2 = 4.22 [Euro]
-Gasprijs        = 0.80 [Euro]
 
-</pre>
-</div>
+
+
+ 
+ 
+<div id="5598bc92-3b80-41c4-8a1d-b8d1e7fca17a"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#5598bc92-3b80-41c4-8a1d-b8d1e7fca17a');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b8704d6611214f598c1ca4979299b00a", "version_major": 2, "version_minor": 0}
+</script>
 </div>
 
 </div>
-</div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="HR+++-Glas">HR+++ Glas<a class="anchor-link" href="#HR+++-Glas">&#182;</a></h2>
-</div>
-</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Lengte</span>   <span class="o">=</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Hoogte</span>   <span class="o">=</span> <span class="mi">2</span>
-
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Temperature_Inside</span>   <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">HRxxx_Glas</span><span class="o">.</span><span class="n">Temperature_Outside</span>  <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">HRxxx_Glas</span> <span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span>  <span class="n">ax10</span> <span class="o">=</span> <span class="n">Data_a</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;CO2_a&quot;</span> <span class="p">]</span> <span class="p">)</span>
+  <span class="n">ax11</span> <span class="o">=</span> <span class="n">Data_b</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;CO2_b&quot;</span> <span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax10</span> <span class="p">)</span>
+  <span class="n">ax12</span> <span class="o">=</span> <span class="n">Data_c</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;CO2_c&quot;</span> <span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax10</span> <span class="p">)</span>
+  <span class="n">Draw_Grids</span> <span class="p">(</span> <span class="n">ax10</span> <span class="p">)</span>    
 </pre></div>
 
 </div>
@@ -12048,74 +12039,34 @@ Gasprijs        = 0.80 [Euro]
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = HR+++ glas
-Lengte      = 6.125 [m]
-Hoogte      = 2 [m]
-Oppervlakte = 12.2 [m2]
-R-Waarde    = 2.00 [m2.K/W]
-U-Waarde    = 0.50 [W/m2.K]
-T-Inside    = 20.0 [Celsius]
-T-Outside   = 0.0 [Celsius]
-Heat Loss   = 122 [W]
-Heat Loss 1m2   = 10 [W]
-Energy Cost 1m2 = 1.92 [Euro]
-Gasprijs        = 0.80 [Euro]
 
-</pre>
-</div>
+
+
+ 
+ 
+<div id="6f26a9ea-7ef4-467a-b1ad-d45869d15cfa"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#6f26a9ea-7ef4-467a-b1ad-d45869d15cfa');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "f25f5a29a9c84de3a2ca24bbe6dd9e20", "version_major": 2, "version_minor": 0}
+</script>
 </div>
 
 </div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Kozijnen">Kozijnen<a class="anchor-link" href="#Kozijnen">&#182;</a></h2><p>Van een typisch kozijn (3 ramen aan de voorkant, waarvan 1 draaibaar) is het oppervlakte geschat t.o.v. de glas oppervlakte. Dit percentage is gebruikt voor de gehele beglazing. Het draaibare deel komt slechts 2 keer voor en wortd hier verwaarloosd. De tuindeuren tellen niet mee omdat die worden verdikt en apart worden geteld.
-<br><br> Vaak (en zeker door leveranciers van kunststof kozijnen) wordt voor hout de forfaitaire waarde van U = 2.4 [W/m2K] aangehouden. Waar deze waarde vandaan komt weet ik niet maar ik kan geen houtsoort vinden die zo'n slechte isolatie-waarde heeft.
-<br>In deze link staan van een groot aantal gangbare houtsoorten de isolatie weerstand: 
-<a href="https://ph-bouwadvies.nl/u-waarden-van-kozijnen-en-de-energieprestatie/">https://ph-bouwadvies.nl/u-waarden-van-kozijnen-en-de-energieprestatie/</a></p>
-<p>Een online berekentool voor kozijnen is hier te vinden: <a href="http://www.warmteweerstand.nl/U-waarde_kozijn.aspx">http://www.warmteweerstand.nl/U-waarde_kozijn.aspx</a>
-<br>Deze tool geeft een veel realistischers waarde voor de isolatie van houten kozijnen, maar ook hier heb ik twijfels over het gebruikte reken-algoritme. Het verschil tussen Grenen (1.36) en Merbau (1.44) is namelijk veel kleiner dan op grond van de lambda mag worden verwacht.</p>
 
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Lambda_Merbau</span>           <span class="o">=</span> <span class="mf">0.18</span>  <span class="c1"># geldt ook voo Afzalia, Bintanger, Robinia, Eiken, Supupira</span>
-<span class="n">Lambda_Dark_Red_Meranti</span> <span class="o">=</span> <span class="mf">0.16</span>  <span class="c1"># geldt ook voor Iroko, Sapeli, Sipo,Teak</span>
-<span class="n">Lambda_Grenen</span>           <span class="o">=</span> <span class="mf">0.13</span>  <span class="c1"># geldt ook Led-Red-Meranti, Lariks, Oregon-Pine, Accoya</span>
-<span class="n">Lambda_Vuren</span>            <span class="o">=</span> <span class="mf">0.11</span>  <span class="c1"># geldt ook voor Western-Red-Cedar</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Voorraam_Opp</span> <span class="o">=</span> <span class="mf">2.1</span> <span class="o">*</span> <span class="mf">0.98</span>
-<span class="n">Glas_Opp</span>     <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mf">0.61</span> <span class="o">*</span> <span class="mf">0.87</span>
-<span class="n">Draai_Opp</span>    <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span> <span class="mf">0.60</span> <span class="o">+</span> <span class="mf">0.80</span> <span class="p">)</span>
-
-<span class="n">Kozijn_Opp1</span>      <span class="o">=</span> <span class="n">Voorraam_Opp</span> <span class="o">-</span> <span class="n">Glas_Opp</span>
-<span class="n">Kozijn_Opp1_Perc</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span> <span class="n">Kozijn_Opp1</span> <span class="o">/</span> <span class="n">Voorraam_Opp</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Voorraam_Opp     = </span><span class="si">%.2f</span><span class="s2"> [m2]&quot;</span> <span class="o">%</span> <span class="n">Voorraam_Opp</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Kozijn_Opp1      = </span><span class="si">%.2f</span><span class="s2"> [m2]&quot;</span> <span class="o">%</span> <span class="n">Kozijn_Opp1</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Draai_Opp        = </span><span class="si">%.2f</span><span class="s2"> [m2]&quot;</span> <span class="o">%</span> <span class="n">Draai_Opp</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;Kozijn_Opp1_Perc = </span><span class="si">%.0f</span><span class="s2"> </span><span class="si">%%</span><span class="s2">&quot;</span>   <span class="o">%</span> <span class="n">Kozijn_Opp1_Perc</span> <span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span>  <span class="n">ax20</span> <span class="o">=</span> <span class="n">Data_a</span><span class="o">.</span><span class="n">plot</span> <span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;T&quot;</span><span class="p">]</span> <span class="p">)</span>
+  <span class="n">Draw_Grids</span> <span class="p">(</span> <span class="n">ax20</span> <span class="p">)</span>    
 </pre></div>
 
 </div>
@@ -12131,13 +12082,21 @@ Gasprijs        = 0.80 [Euro]
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Voorraam_Opp     = 2.06 [m2]
-Kozijn_Opp1      = 0.47 [m2]
-Draai_Opp        = 0.28 [m2]
-Kozijn_Opp1_Perc = 23 %
-</pre>
+
+
+
+ 
+ 
+<div id="25894ba5-a924-47d5-be73-75dae01253f8"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#25894ba5-a924-47d5-be73-75dae01253f8');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "ed94149ee1ea4f32bc04f09ab465cc13", "version_major": 2, "version_minor": 0}
+</script>
 </div>
+
 </div>
 
 </div>
@@ -12146,387 +12105,16 @@ Kozijn_Opp1_Perc = 23 %
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Kozijn_Dikte</span> <span class="o">=</span> <span class="mf">0.12</span>
-<span class="n">Draai_Dikte</span>  <span class="o">=</span> <span class="mf">0.05</span>
-
-<span class="n">Kozijn_Opp</span> <span class="o">=</span> <span class="n">Kozijn_Opp1_Perc</span> <span class="o">*</span> <span class="n">Opp</span> <span class="o">/</span> <span class="mi">100</span>
-
-<span class="n">Kozijn_Merbau</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Merbau&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Merbau</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Merbau</span>
-<span class="n">Kozijn_Merbau</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
-
-<span class="n">Kozijn_Dark_Red_Meranti</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Dark Red Merantie&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Dark_Red_Meranti</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Dark_Red_Meranti</span>
-<span class="n">Kozijn_Dark_Red_Meranti</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
-
-<span class="n">Kozijn_Grenen</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Grenen&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Grenen</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Grenen</span>
-<span class="n">Kozijn_Grenen</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
-
-<span class="n">Kozijn_Vuren</span>        <span class="o">=</span> <span class="n">Heat_Transfer_Object</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Vuren&quot;</span> <span class="p">)</span>  
-<span class="n">Kozijn_Vuren</span><span class="o">.</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">Lambda_Vuren</span>
-<span class="n">Kozijn_Vuren</span><span class="o">.</span><span class="n">Dikte</span>  <span class="o">=</span> <span class="n">Kozijn_Dikte</span>
-
-<span class="n">Kozijn_HH1</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Merbau&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Merbau</span> <span class="p">)</span>
-<span class="n">Kozijn_HH1</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Kozijn_HH2</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Dark Red Meranti&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Dark_Red_Meranti</span> <span class="p">)</span>
-<span class="n">Kozijn_HH2</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Kozijn_HH3</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Grenen&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Grenen</span> <span class="p">)</span>
-<span class="n">Kozijn_HH3</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Kozijn_HH4</span> <span class="o">=</span> <span class="n">Sandwich</span> <span class="p">(</span> <span class="s2">&quot;Kozijn Vuren&quot;</span> <span class="p">)</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Lengte</span>              <span class="o">=</span> <span class="mi">2</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Breedte</span>             <span class="o">=</span> <span class="n">Kozijn_Opp</span> <span class="o">/</span> <span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Lengte</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Temperature_Inside</span>  <span class="o">=</span> <span class="n">Temperatuur_Binnen</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Temperature_Outside</span> <span class="o">=</span> <span class="n">Temperatuur_Buiten</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rsi</span> <span class="p">)</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Kozijn_Vuren</span> <span class="p">)</span>
-<span class="n">Kozijn_HH4</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span> <span class="n">Rse</span> <span class="p">)</span>
-
-<span class="n">Base_Heat</span><span class="o">.</span><span class="n">PrintLevel</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH1</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH2</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH3</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span> <span class="n">Kozijn_HH4</span> <span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Name        = Kozijn Merbau
-Layers    = [ Rsi, Kozijn Merbau, Rse,  ]
-R-Waarden = 0.84 [ 0.13, 0.67, 0.04,  ] [m2.K/W]
-
-Name        = Kozijn Dark Red Meranti
-Layers    = [ Rsi, Kozijn Dark Red Merantie, Rse,  ]
-R-Waarden = 0.92 [ 0.13, 0.75, 0.04,  ] [m2.K/W]
-
-Name        = Kozijn Grenen
-Layers    = [ Rsi, Kozijn Grenen, Rse,  ]
-R-Waarden = 1.09 [ 0.13, 0.92, 0.04,  ] [m2.K/W]
-
-Name        = Kozijn Vuren
-Layers    = [ Rsi, Kozijn Vuren, Rse,  ]
-R-Waarden = 1.26 [ 0.13, 1.09, 0.04,  ] [m2.K/W]
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Vergelijk-van-de-verschillende-Glassoorten">Vergelijk van de verschillende Glassoorten<a class="anchor-link" href="#Vergelijk-van-de-verschillende-Glassoorten">&#182;</a></h2><p>Deze tabel functie is gemaakt om het warmteverlies van een gehele ruimte of woning in detail weer te geven. In de huidige situatie waar een aantal verschillende glasssoorten met elkaar worden vergeleken, is de onderste regel "Totaal", evenals enkele kolommen, volkomen zinloos. 
-<br>Het rechter deel van de tabel (kolommen met de getallen erboven) geeft de kolomnaam de buitentemperatuur aan en de waarden in die kolom staan, is het warmteverlies in Watt dat door de muur weglekt bij die buitentemperatuur. 
-<br>kolom Kosten    = de geschatte totale jaarlijke Energiekosten in Euros (bij gebruik van Gas)
-<br>kolom Kosten-m2 = de geschatte jaarlijke Energiekosten per m2 in Euros (bij gebruik van Gas)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Ts</span>  <span class="o">=</span> <span class="nb">range</span> <span class="p">(</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>
-<span class="n">Elements</span> <span class="o">=</span> <span class="p">[</span> <span class="n">HR_Glas</span><span class="p">,</span> <span class="n">HRxx_Glas</span><span class="p">,</span> <span class="n">HRxxx_Glas</span><span class="p">,</span> <span class="n">Kozijn_HH1</span><span class="p">,</span> <span class="n">Kozijn_HH2</span><span class="p">,</span> <span class="n">Kozijn_HH3</span><span class="p">,</span> <span class="n">Kozijn_HH4</span> <span class="p">]</span>
-<span class="n">Heat_Transfer_Table</span> <span class="p">(</span> <span class="n">Elements</span><span class="p">,</span> <span class="n">Ts</span> <span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>R-waarde</th>
-      <th>U-waarde</th>
-      <th>Oppervlak</th>
-      <th>T-Binnen</th>
-      <th>T-Buiten</th>
-      <th>Kosten-m2</th>
-      <th>Kosten</th>
-      <th>Jaar-m3</th>
-      <th>-8</th>
-      <th>-6</th>
-      <th>-4</th>
-      <th>-2</th>
-      <th>0</th>
-      <th>2</th>
-      <th>4</th>
-      <th>6</th>
-      <th>8</th>
-      <th>10</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>HR glas</th>
-      <td>0.35</td>
-      <td>2.8</td>
-      <td>12.25</td>
-      <td>20</td>
-      <td>0</td>
-      <td>14.91</td>
-      <td>182</td>
-      <td>228</td>
-      <td>960</td>
-      <td>891</td>
-      <td>823</td>
-      <td>754</td>
-      <td>686</td>
-      <td>617</td>
-      <td>548</td>
-      <td>480</td>
-      <td>411</td>
-      <td>343</td>
-    </tr>
-    <tr>
-      <th>HR++ glas</th>
-      <td>0.9</td>
-      <td>1.1</td>
-      <td>12.25</td>
-      <td>20</td>
-      <td>0</td>
-      <td>5.85</td>
-      <td>71</td>
-      <td>89</td>
-      <td>377</td>
-      <td>350</td>
-      <td>323</td>
-      <td>296</td>
-      <td>269</td>
-      <td>242</td>
-      <td>215</td>
-      <td>188</td>
-      <td>161</td>
-      <td>134</td>
-    </tr>
-    <tr>
-      <th>HR+++ glas</th>
-      <td>2</td>
-      <td>0.5</td>
-      <td>12.25</td>
-      <td>20</td>
-      <td>0</td>
-      <td>2.66</td>
-      <td>32</td>
-      <td>40</td>
-      <td>171</td>
-      <td>159</td>
-      <td>147</td>
-      <td>134</td>
-      <td>122</td>
-      <td>110</td>
-      <td>98</td>
-      <td>85</td>
-      <td>73</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>Kozijn Merbau</th>
-      <td>0.83</td>
-      <td>1.19</td>
-      <td>2.77</td>
-      <td>20</td>
-      <td>0</td>
-      <td>6.36</td>
-      <td>17</td>
-      <td>22</td>
-      <td>92</td>
-      <td>86</td>
-      <td>79</td>
-      <td>72</td>
-      <td>66</td>
-      <td>59</td>
-      <td>53</td>
-      <td>46</td>
-      <td>39</td>
-      <td>33</td>
-    </tr>
-    <tr>
-      <th>Kozijn Dark Red Meranti</th>
-      <td>0.92</td>
-      <td>1.08</td>
-      <td>2.77</td>
-      <td>20</td>
-      <td>0</td>
-      <td>5.78</td>
-      <td>16</td>
-      <td>20</td>
-      <td>84</td>
-      <td>78</td>
-      <td>72</td>
-      <td>66</td>
-      <td>60</td>
-      <td>54</td>
-      <td>48</td>
-      <td>42</td>
-      <td>36</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>Kozijn Grenen</th>
-      <td>1.09</td>
-      <td>0.91</td>
-      <td>2.77</td>
-      <td>20</td>
-      <td>0</td>
-      <td>4.87</td>
-      <td>13</td>
-      <td>16</td>
-      <td>71</td>
-      <td>65</td>
-      <td>60</td>
-      <td>55</td>
-      <td>50</td>
-      <td>45</td>
-      <td>40</td>
-      <td>35</td>
-      <td>30</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>Kozijn Vuren</th>
-      <td>1.26</td>
-      <td>0.79</td>
-      <td>2.77</td>
-      <td>20</td>
-      <td>0</td>
-      <td>4.22</td>
-      <td>11</td>
-      <td>14</td>
-      <td>61</td>
-      <td>57</td>
-      <td>52</td>
-      <td>48</td>
-      <td>43</td>
-      <td>39</td>
-      <td>35</td>
-      <td>30</td>
-      <td>26</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>Totaal</th>
-      <td>R-waarde</td>
-      <td>U-waarde</td>
-      <td>Oppervlak</td>
-      <td>T-Binnen</td>
-      <td>T-Buiten</td>
-      <td>Kosten-m2</td>
-      <td>342</td>
-      <td>429</td>
-      <td>1816</td>
-      <td>1686</td>
-      <td>1556</td>
-      <td>1425</td>
-      <td>1296</td>
-      <td>1166</td>
-      <td>1037</td>
-      <td>906</td>
-      <td>776</td>
-      <td>647</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusie">Conclusie<a class="anchor-link" href="#Conclusie">&#182;</a></h2><p>HR++ glas is ongeveer 3 keer beter dan HR glas.
-<br>HR++= glas is ongeveer 6 keer beter dan HR glas.</p>
-<p>Vanuit: <a href="https://www.verbouwkosten.com/dubbel-glas/kosten/#Per-m2">https://www.verbouwkosten.com/dubbel-glas/kosten/#Per-m2</a>
-<br>Van thermopane (het oude gewone dubbel glas) naar HR++ glas bespaart 10m3 gas / m2, hetgeen overeenkomt met 8 Euro / m2.
-<br>Installatie kost (exclusief afvoer en schilderen) 135 Euro / m2, wat neer komt op een terugverdientijd van 17 jaar !!
-<br>De kosten bestaan ruwweg voor de helft uit materiaalkosten en voor de helft uit arbeidskosten. Als we nu inschatten dat het schilderwerk ook nog eens dezelfde arbeidskosten vereist, komen we in totaal op een terugverdientijd van ongeveer 25 jaar.</p>
-<p>Op basis van mijn eigen berekeningen kom ik nog iets ongunstiger uit, namelijk een besparing van 6.5 Eur / m2,
-oftewel een terugverdientijd van 20 jaar zonder schilderwerk en 30 jaar met schilderwerk!!!</p>
-<p>Bij zelfdoen kom je dus uit op ongeveer de helft van de kosten en dus ook op ongeveer de helft van de terugverdientijd.</p>
-<p>Dus gooi het over de boeg van comfort !!!!
-<br><img src="Glas_Temperaturen.png" width="50%" height="5%"></p>
-<p>Daarnaast is het waarschijnlijk interessant om (als het kozijn dat toelaat), meteen over te gaan naar HR+++ glas)</p>
-<p>Kozijnen maken toch een substantieel deel uit van het totale buitenoppervlak, in het algemeen 15 .. 20 % en in mijn geval zelfs 23% van het glas oppervlak. Op websites van leveranciers van kozijnen wordt vaak gerekend met een forfaitaire waarde van de isolatie-waarde van hout, waardoor een te slechte voorstelling van zaken wordt gegeven. Zoals de table hierboven laat zien, hebben alle houtsoorten een vergelijkbaarwarmteverlies als HR++ glas. Alleen in het geval dat HR+++ glas wordt genomen dienen andere kozijnen gebruikt te worden. De economische besparing van betere kozijnen bedraagt in mijn geval ongeveer 10 Euro per jaar.</p>
-
-</div>
-</div>
 </div>
     </div>
   </div>
