@@ -23,18 +23,104 @@ div {margin-bottom:4px}
 img {margin-right:2px}
 </style>
 
+
+<script language="JavaScript">
+  function Toggle(node) {
+	// Unfold the branch if it isn't visible
+	  if (node.nextSibling.style.display == 'none')	{
+ 		// Change the image (if there is an image)
+		  if (node.childNodes.length > 0) {
+			  if (node.childNodes.item(0).tagName == "IMG") {
+				  node.childNodes.item(0).src = "minus.gif";
+			  }
+		  }
+    	node.nextSibling.style.display = '';
+	  }
+	  // Collapse the branch if it IS visible
+	  else {
+		// Change the image (if there is an image)
+      if (node.childNodes.length > 0)	{
+        if (node.childNodes.item(0).tagName == "IMG") {
+   				node.childNodes.item(0).src = "plus.gif";
+			  }
+		  }
+    	node.nextSibling.style.display = 'none';
+	  }
+  }
+
+  function collapse(pId) {
+  var node
+    node=document.getElementById(pId);
+    node.childNodes.item(0).src = "plus.gif"
+    node.nextSibling.style.display = 'none'
+  }
+
+  function main() {
+collapse("ID1")
+collapse("ID2")
+collapse("ID3")
+collapse("ID4")
+collapse("ID5")
+collapse("ID6")
+collapse("ID7")
+collapse("ID8")
+collapse("ID9")
+collapse("ID10")
+
+  }
+</script>
+
+
 </head>
 <body>
-<div><img src="dot.gif"><a href="-Op_Weg_Naar_Energie_Neutraal_Wonen.html" target="a"><b>Op Weg Naar Energie Neutraal Wonen</b></a></div>
-<div><img src="dot.gif"><a href="Geo_Textiel.html" target="a">Geo_Textiel</a></div>
-<div><img src="dot.gif"><a href="Hemelwater_Afvoer.html" target="a">Hemelwater_Afvoer</a></div>
-<div><img src="dot.gif"><a href="Infiltratie_Kratten.html" target="a">Infiltratie_Kratten</a></div>
-<div><img src="dot.gif"><a href="PVC_Buis.html" target="a">PVC_Buis</a></div>
-<div><img src="dot.gif"><a href="Uitvoering_Hemelwaterafvoer.html" target="a">Uitvoering_Hemelwaterafvoer</a></div>
-<div><img src="dot.gif"><a href="Waarnemingen.html" target="a">Waarnemingen</a></div>
-<div><img src="dot.gif"><a href="Zandafvoer.html" target="a">Zandafvoer</a></div>
-<div><img src="dot.gif"><a href="Zandvangput.html" target="a">Zandvangput</a></div>
+<div><img src="dot.gif"><a href="Op weg naar Energie Neutraal Wonen.html" target="a"><b>Op weg naar Energie Neutraal Wonen</b></a></div>
 
+<!---- New Tree --------->
+<a onclick="Toggle(this)" class="topic" id="ID0"><img src="minus.gif"><b> Hemelwater Afvoer</b></a><div class="level">
+<div><img src="dot.gif"><a href="Hemelwater Afvoer.html" target="a">Hemelwater Afvoer</a></div>
+<div><img src="dot.gif"><a href="Uitvoering Hemelwaterafvoer.html" target="a">Uitvoering Hemelwaterafvoer</a></div>
+<div><img src="dot.gif"><a href="Waarnemingen.html" target="a">Waarnemingen</a></div>
+<div><img src="dot.gif"><a href="Infiltratie Kratten.html" target="a">Infiltratie Kratten</a></div>
+<div><img src="dot.gif"><a href="Geo Textiel.html" target="a">Geo Textiel</a></div>
+<div><img src="dot.gif"><a href="Zandvangput.html" target="a">Zandvangput</a></div>
+<div><img src="dot.gif"><a href="PVC Buis.html" target="a">PVC Buis</a></div>
+<div><img src="dot.gif"><a href="Zandafvoer.html" target="a">Zandafvoer</a></div>
+</div><div></div>
+<!---- New Tree --------->
+<a onclick="Toggle(this)" class="topic" id="ID1"><img src="minus.gif"><b> Ventilatie</b></a><div class="level">
+<div><img src="dot.gif"><a href="Ventilatie Algemeen.html" target="a">Ventilatie Algemeen</a></div>
+<div><img src="dot.gif"><a href="Condensatie.html" target="a">Condensatie</a></div>
+<div><img src="dot.gif"><a href="Ventilatie DIY WTW.html" target="a">Ventilatie DIY WTW</a></div>
+<div><img src="dot.gif"><a href="Tegenstroom WTW.html" target="a">Tegenstroom WTW</a></div>
+<div><img src="dot.gif"><a href="Meting aluminium folie.html" target="a">Meting aluminium folie</a></div>
+<div><img src="dot.gif"><a href="Decentrale Ventilatie.html" target="a">Decentrale Ventilatie</a></div>
+<div><img src="dot.gif"><a href="Decentrale Ventilatie All.html" target="a">Decentrale Ventilatie All</a></div>
+<div><img src="dot.gif"><a href="CO2 meten.html" target="a">CO2 meten</a></div>
+<div><img src="dot.gif"><a href="Ventilatie met WarmteTerugWinning.html" target="a">Ventilatie met WarmteTerugWinning</a></div>
+<div><img src="dot.gif"><a href="Comfort.html" target="a">Comfort</a></div>
+<div><img src="top_page.gif"><a href="http://www.olino.org/articles/2016/12/12/energie-besparen-en-duurzamer-leven-begint-bij-jezelf/" target="_blank">energie-besparen-en-duurzamer-leven-begint-bij-jezelf</a></div>
+<div><img src="dot.gif"><a href="Olino.html" target="a">Olino</a></div>
+</div><div></div>
+<!---- New Tree --------->
+<a onclick="Toggle(this)" class="topic" id="ID2"><img src="minus.gif"><b> Isolatie</b></a><div class="level">
+</div><div></div>
+<!---- New Tree --------->
+<a onclick="Toggle(this)" class="topic" id="ID3"><img src="minus.gif"><b> Verwarming</b></a><div class="level">
+<div><img src="dot.gif"><a href="Spouwmuur Isolatie.html" target="a">Spouwmuur Isolatie</a></div>
+<div><img src="dot.gif"><a href="Spouwmuur Isolatie literatuur.html" target="a">Spouwmuur Isolatie literatuur</a></div>
+<div><img src="dot.gif"><a href="Warmte Coeff.html" target="a">Warmte Coeff</a></div>
+<div><img src="dot.gif"><a href=" jaar.html" target="a"> jaar</a></div>
+<div><img src="dot.gif"><a href="365=68.4932.html" target="a">365=68.4932</a></div>
+<div><img src="dot.gif"><a href="52=480.7692.html" target="a">52=480.7692</a></div>
+<div><img src="dot.gif"><a href="365=63.0137.html" target="a">365=63.0137</a></div>
+<div><img src="dot.gif"><a href="365=3.2877.html" target="a">365=3.2877</a></div>
+<div><img src="dot.gif"><a href="365=-0.8219.html" target="a">365=-0.8219</a></div>
+<div><img src="dot.gif"><a href=" dag.html" target="a"> dag</a></div>
+<div><img src="dot.gif"><a href="dag.html" target="a">dag</a></div>
+<div><img src="dot.gif"><a href=" dag.html" target="a"> dag</a></div>
+<div><img src="dot.gif"><a href="dag).html" target="a">dag)</a></div>
+<div><img src="dot.gif"><a href="Screen clipping taken: 21-Nov-18, 16:47.html" target="a">Screen clipping taken: 21-Nov-18, 16:47</a></div>
+</div><div></div>
 <body text="#000000" vlink="#5584aa" link="#006699" bgcolor="white" onload="main()">
 
 
